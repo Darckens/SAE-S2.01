@@ -1,0 +1,3 @@
+# Permet de ne pas push les fichier de données csv
+
+data/*.csv
