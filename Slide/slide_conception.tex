@@ -1,0 +1,326 @@
+\documentclass[11pt]{beamer}
+
+\usetheme{Madrid}
+%\usepackage{palatino} % ← Commenté temporairement
+
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=0.4\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\hspace{1em}\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.30\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.3\paperwidth,ht=2.5ex,dp=1ex,right]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate{} \hspace{1em}
+      \insertframenumber{} / \inserttotalframenumber\hspace{1em}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+
+\title[Présentation]{Avancement SAE}
+\subtitle{S2.01 Conception et implémentation d'une base de données}
+
+\author[Ibrahim BENKHERFELLAH \and Axel COULET]{Ibrahim BENKHERFELLAH \and Axel COULET}
+\institute[USPN]{Université Sorbonne Paris Nord \\}
+\date[\today]{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+  \frametitle{Table des matières}
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+\begin{frame}
+  \frametitle{Objectif du projet}
+  \begin{itemize}
+    \item<1-> Comprendre et modéliser le commerce des technologies à faible émission de carbone.
+    \item<2-> Concevoir une base de données normalisée à partir de deux jeux de données CSV.
+    \item<3-> Interroger et visualiser les données pour produire des analyses pertinentes.
+  \end{itemize}
+\end{frame}
+
+\section{Exploration et compréhension des données}
+\begin{frame}
+  \frametitle{Étude des sources de données}
+  \begin{itemize}
+    \item Fichiers CSV étudiés :
+      \begin{itemize}
+        \item<1-> \texttt{\href{https://climatedata.imf.org/datasets/1d33174e9e46429d9e570d539556f66a/explore}{Trade\_in\_Low\_Carbon\_Technology\_Products.csv}}
+        \item \texttt{\href{https://climatedata.imf.org/datasets/975bc577fe7342c2a3651e8841959c47_0/explore}{Bilateral\_Trade\_in\_Low\_Carbon\_Technology\_Products.csv}}
+      \end{itemize}
+    \item<2-> Exploration initiale avec Python (pandas) : \\
+          \texttt{.head()}, \texttt{.info()}, etc.
+    \item<3-> Identification de colonnes clés : \texttt{CTS\_Code}, \texttt{Indicator}, \texttt{Trade\_Flow}, etc.
+    \item<4-> Difficultés rencontrées : [à compléter]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sources et structuration des fichiers}
+  \begin{itemize}
+    \item<1-> Données structurées en colonnes d'années : F1994 à F2023.
+    \item<2-> Présence de colonnes de description redondantes (\texttt{CTS\_Code}, \texttt{CTS\_Name}, \texttt{CTS\_Full\_Descriptor}).
+    \item<3-> Première étape : lecture manuelle pour repérage des redondances et structures tabulaires.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Préparation et normalisation des données}
+  \begin{itemize}
+    \item<1-> Conversion des colonnes FXXXX en format court (année, valeur).
+    \item<2-> \text{Normalisation des années (F1994 à F2023)} :
+    \begin{itemize}
+      \item Chaque colonne FXXXX devient une ligne avec une valeur d'année.
+      \item Transformation effectuée via \texttt{UNION ALL} dans SQL pour correspondre à la logique de \texttt{stack()} en Python.
+    \end{itemize}
+    \item<3-> Problèmes rencontrés :
+    \begin{itemize}
+      \item Ambiguïté sur le pays origine.
+      \item Duplication de lignes si filtrage incorrect.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Données structurées et décisions clés}
+  \begin{itemize}
+    \item<1-> Création d'une table \texttt{echanger\_avec} pour les données bilatérales :
+    \begin{itemize}
+      \item Relation réflexive entre deux pays (deux clés étrangères vers \texttt{country}).
+      \item Attribution de \texttt{pays\_origine} selon le sens du flux.
+    \end{itemize}
+    \item<2-> Table \texttt{donnee\_pays} pour les données nationales.
+    \item<3-> Lien systématique aux dimensions : pays, indicateur, catégorie, année.
+  \end{itemize}
+\end{frame}
+
+\section{Modélisation de la base de données}
+\begin{frame}
+  \frametitle{Modèle conceptuel (EA)}
+  \begin{itemize}
+    \item<1-> Type Entités : \texttt{Country}, \texttt{Indicator}, \texttt{CTS}, \texttt{Trade\_Flow}, \texttt{Year}
+    \item<2-> Type Associations : 
+      \begin{itemize}
+        \item \texttt{Échanger\_Avec} (réflexive sur \texttt{Country})
+        \item \texttt{Donnée\_Pays} (relation simple avec agrégation)
+      \end{itemize}
+    \item<3-> Justification des cardinalités et des relations
+    \item<4-> Illustration du schéma : 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Structure relationnelle finale}
+  \begin{itemize}
+    \item Schéma relationnel résultant de la modélisation EA :
+    \begin{itemize}
+      \item \texttt{country(idCountry, Country, ISO2, ISO3)}
+      \item \texttt{cts(idCTS, CTS\_Code, CTS\_Name, CTS\_Full\_Descriptor)}
+      \item \texttt{trade\_flow(idTrade, Trade\_Flow, Scale)}
+      \item \texttt{indicator(idIndicator, Indicator\_, Source, Units)}
+      \item \texttt{year(id\_Year, Year)}
+      \item \texttt{echanger\_avec(id\_country\_1, id\_country\_2, pays\_origine, id\_indicator, id\_cts, id\_trade, id\_year, trade\_value)}
+      \item \texttt{donnee\_pays(id\_country, id\_indicator, id\_cts, id\_trade, id\_year, trade\_value)}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Forme normale : 1NF}
+  \begin{itemize}
+    \item Toutes les valeurs sont atomiques : aucun champ multivalué ou composé.
+    \item Transformation des colonnes F1994 à F2023 en une colonne \texttt{id\_year} via pivot SQL.
+    \item Tables relationnelles sans redondance horizontale.
+    \item \textbf{Conclusion} : le schéma respecte la \textbf{première forme normale (1NF)}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Forme normale : 2NF}
+  \begin{itemize}
+    \item Le schéma est en 1NF.
+    \item Aucune dépendance fonctionnelle partielle dans les tables à clés composites.
+    \item Exemple : les descripteurs CTS ont été extraits dans une table distincte, reliée par \texttt{CTS\_Code}.
+    \item \textbf{Conclusion} : toutes les dépendances fonctionnelles concernent la clé entière → \textbf{2NF validée}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Forme normale : 3NF}
+  \begin{itemize}
+    \item Le schéma est en 2NF.
+    \item Suppression des dépendances transitives.
+    \item Exemple : l’unité d’un indicateur dépend directement de \texttt{indicator}, pas d’un pays ou d’un code CTS.
+    \item \textbf{Conclusion} : toutes les colonnes non-clés dépendent uniquement de la clé primaire → \textbf{schéma en 3NF}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Forme normale : BCNF}
+  \begin{itemize}
+    \item Toutes les dépendances fonctionnelles ont un antécédent qui est une super-clé.
+    \item Exemple : dans \texttt{echanger\_avec}, seule la combinaison complète des identifiants détermine \texttt{trade\_value}.
+    \item Il n'existe pas de dépendance fonctionnelle violant cette condition.
+    \item \textbf{Conclusion} : le schéma respecte la forme normale de \textbf{Boyce-Codd (BCNF)}.
+  \end{itemize}
+\end{frame}
+
+\section{Script de création et peuplement SQL}
+\begin{frame}[fragile]
+  \frametitle{Création de la table \texttt{Country}}
+\begin{verbatim}
+CREATE TABLE Country(
+   id_Country INTEGER PRIMARY KEY,
+   Country VARCHAR(50),
+   ISO2 CHAR(2),
+   ISO3 CHAR(3)
+);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Création de la table \texttt{Indicator}}
+\begin{verbatim}
+CREATE TABLE Indicator(
+   id_Indicator INTEGER PRIMARY KEY,
+   Indicator_ VARCHAR(80),
+   Source VARCHAR,
+   Units VARCHAR(50)
+);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Création de la table \texttt{CTS}}
+\begin{verbatim}
+CREATE TABLE CTS(
+   id_CTS INTEGER PRIMARY KEY,
+   CTS_Code VARCHAR(6),
+   CTS_Name VARCHAR(100),
+   CTS_Full_Descriptor VARCHAR(150)
+);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Création de la table \texttt{Trade\_Flow}}
+\begin{verbatim}
+CREATE TABLE Trade_Flow(
+   id_Trade INTEGER PRIMARY KEY,
+   Trade_Flow VARCHAR(20),
+   Scale VARCHAR(5)
+);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Création de la table \texttt{Year}}
+\begin{verbatim}
+CREATE TABLE Year(
+   id_Year INTEGER PRIMARY KEY,
+   Year DATE
+);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Création de la table \texttt{Echanger\_Avec}}
+\begin{verbatim}
+CREATE TABLE Echanger_Avec (
+    id_Country_1 INTEGER REFERENCES Country(id_Country),
+    id_Country_2 INTEGER REFERENCES Country(id_Country),
+    Pays_Origine INTEGER REFERENCES Country(id_Country),
+    id_Indicator INTEGER REFERENCES Indicator(id_Indicator),
+    id_CTS INTEGER REFERENCES CTS(id_CTS),
+    id_Trade INTEGER REFERENCES Trade_Flow(id_Trade),
+    id_Year INTEGER REFERENCES Year(id_Year),
+    trade_value DOUBLE PRECISION,
+    PRIMARY KEY(id_Country_1, id_Country_2, Pays_Origine,
+                id_Indicator, id_CTS, id_Trade, id_Year),
+    CHECK (id_Country_1 < id_Country_2)
+);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Création de la table \texttt{Donnee\_Pays}}
+\begin{verbatim}
+CREATE TABLE Donnee_Pays (
+    id_Country INTEGER REFERENCES Country(id_Country),
+    id_Indicator INTEGER REFERENCES Indicator(id_Indicator),
+    id_CTS INTEGER REFERENCES CTS(id_CTS),
+    id_Trade INTEGER REFERENCES Trade_Flow(id_Trade),
+    id_Year INTEGER REFERENCES Year(id_Year),
+    trade_value DOUBLE PRECISION,
+    PRIMARY KEY(id_Country, id_Indicator, id_CTS, 
+    id_Trade, id_Year)
+);
+\end{verbatim}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Peuplement de la base}
+  \begin{itemize}
+    \item Utilisation de \texttt{COPY}, \texttt{INSERT INTO} avec jointures.
+    \item Alignement avec les traitements Python (\texttt{melt + filtering}).
+    \item Cas particuliers traités : 
+      \begin{itemize}
+        \item Échanges d’un pays avec lui-même
+        \item Lignes \texttt{NULL} / Trade Flow = Not Applicable
+      \end{itemize}
+    \item Difficultés rencontrées : [à compléter]
+  \end{itemize}
+\end{frame}
+
+\section{Interrogation et visualisation des données}
+\begin{frame}
+  \frametitle{Requêtes d’analyse}
+  \begin{itemize}
+    \item Nombre d’échanges par année
+    \item Top pays exportateurs/importateurs
+    \item Évolution des indicateurs par catégorie CTS
+    \item Comparaison SQL x CSV avec Python
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Visualisation}
+  \begin{itemize}
+    \item Utilisation de Metabase pour interroger la BD
+    \item Utilisation de Tableau pour valider les valeurs issues du CSV
+    \item Comparaison SQL / Python → vérification de l’intégrité
+    \item Exemples visuels : [insérer graphiques ou screenshots]
+  \end{itemize}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}
+  \frametitle{Bilan du projet}
+  \begin{itemize}
+    \item Base de données fonctionnelle et fidèle au CSV (dans nos rêves)
+    \item Respect des étapes du processus de modélisation
+    \item Difficultés sur l’import (pivot, valeurs nulles, sens du flux)
+    \item Vérification croisée avec Python
+    \item Améliorations possibles : [à compléter]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Merci pour votre attention}
+  \begin{center}
+    \huge \textbf{Questions ?}
+  \end{center}
+\end{frame}
+
+\end{document}
