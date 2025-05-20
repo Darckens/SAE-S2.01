@@ -118,64 +118,64 @@ CREATE TEMPORARY TABLE tmp_bilateral_trade_data (
 
 -- Création des tables principales
 CREATE TABLE Country(
-   id_Country INTEGER PRIMARY KEY,
+   id_Country SMALLINT PRIMARY KEY,
    Country VARCHAR(50),
    ISO2 CHAR(2),
    ISO3 CHAR(3)
 );
 
 CREATE TABLE Indicator(
-   id_Indicator INTEGER PRIMARY KEY,
-   Indicator_ VARCHAR(80),
+   id_Indicator SMALLINT PRIMARY KEY,
+   Indicator VARCHAR(80),
    Source VARCHAR,
-   Units VARCHAR(50)
+   Units VARCHAR(50),
+   Scale VARCHAR(5)
 );
 
 CREATE TABLE CTS(
-   id_CTS INTEGER PRIMARY KEY,
+   id_CTS SMALLINT PRIMARY KEY,
    CTS_Code VARCHAR(6),
    CTS_Name VARCHAR(100),
    CTS_Full_Descriptor VARCHAR(150)
 );
 
 CREATE TABLE Trade_Flow(
-   id_Trade_Flaw INTEGER PRIMARY KEY,
-   Trade_Flow VARCHAR(20),
-   Scale VARCHAR(5)
+   id_Trade_Flow SMALLINT PRIMARY KEY,
+   Trade_Flow VARCHAR(20)
 );
 
 CREATE TABLE Year(
-   id_Year INTEGER PRIMARY KEY,
+   id_Year SMALLINT PRIMARY KEY,
    Year DATE
 );
 
 CREATE TABLE Bilateral_Trade (
-    id_Country INTEGER REFERENCES Country(id_Country),
-    id_Conterpart_country INTEGER REFERENCES Country(id_Country),
-    id_Indicator INTEGER REFERENCES Indicator(id_Indicator),
-    id_CTS INTEGER REFERENCES CTS(id_CTS),
-    id_Trade_Flaw INTEGER REFERENCES Trade_Flow(id_Trade_Flaw),
-    id_Year INTEGER REFERENCES Year(id_Year),
+    id_Country SMALLINT REFERENCES Country(id_Country),
+    id_Conterpart_country SMALLINT REFERENCES Country(id_Country),
+    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(id_Trade_Flow),
+    id_Year SMALLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
-    PRIMARY KEY(id_Country, id_Conterpart_country, id_Indicator, id_CTS, id_Trade_Flaw, id_Year)
+    PRIMARY KEY(id_Country, id_Conterpart_country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
 
 -- Création de la table pour les données nationales
 CREATE TABLE Trade (
-    id_Country INTEGER REFERENCES Country(id_Country),
-    id_Indicator INTEGER REFERENCES Indicator(id_Indicator),
-    id_CTS INTEGER REFERENCES CTS(id_CTS),
-    id_Trade_Flaw INTEGER REFERENCES Trade_Flow(id_Trade_Flaw),
-    id_Year INTEGER REFERENCES Year(id_Year),
+    id_Country SMALLINT REFERENCES Country(id_Country),
+    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(id_Trade_Flow),
+    id_Year SMALLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
-    PRIMARY KEY(id_Country, id_Indicator, id_CTS, id_Trade_Flaw, id_Year)
+    PRIMARY KEY(id_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
 
 -- Insertion des données dans les tables principales
 -- Country
 INSERT INTO Country(id_Country, Country, ISO2, ISO3)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY Country)::INTEGER,
+    ROW_NUMBER() OVER (ORDER BY Country)::SMALLINT,
     Country,
     ISO2,
     ISO3
@@ -187,23 +187,24 @@ FROM (
 ORDER BY Country;
 
 -- Indicator
-INSERT INTO Indicator(id_Indicator, Indicator_, Source, Units)
+INSERT INTO Indicator(id_Indicator, Indicator, Source, Units, Scale)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY Indicator)::INTEGER,
+    ROW_NUMBER() OVER (ORDER BY Indicator)::SMALLINT,
     Indicator,
     MIN(Source),
-    MIN(Unit)
+    MIN(Unit),
+    MIN(Scale)
 FROM (
-    SELECT Indicator, Source, Unit FROM tmp_trade_data
+    SELECT Indicator, Source, Unit, Scale FROM tmp_trade_data
     UNION ALL
-    SELECT Indicator, Source, Unit FROM tmp_bilateral_trade_data
+    SELECT Indicator, Source, Unit, Scale FROM tmp_bilateral_trade_data
 )
 GROUP BY Indicator;
 
 -- CTS
 INSERT INTO CTS(id_CTS, CTS_Code, CTS_Name, CTS_Full_Descriptor)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY CTS_Code)::INTEGER,
+    ROW_NUMBER() OVER (ORDER BY CTS_Code)::SMALLINT,
     CTS_Code,
     MIN(CTS_Name),
     MIN(CTS_Full_Descriptor)
@@ -215,15 +216,14 @@ FROM (
 GROUP BY CTS_Code;
 
 -- Trade_Flow
-INSERT INTO Trade_Flow(id_Trade_Flaw, Trade_Flow, Scale)
+INSERT INTO Trade_Flow(id_Trade_Flow, Trade_Flow)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY Trade_Flow)::INTEGER,
-    Trade_Flow,
-    MIN(Scale)
+    ROW_NUMBER() OVER (ORDER BY Trade_Flow)::SMALLINT,
+    Trade_Flow
 FROM (
-    SELECT Trade_Flow, Scale FROM tmp_trade_data
+    SELECT Trade_Flow FROM tmp_trade_data
     UNION ALL
-    SELECT Trade_Flow, Scale FROM tmp_bilateral_trade_data
+    SELECT Trade_Flow FROM tmp_bilateral_trade_data
 ) AS all_tf
 GROUP BY Trade_Flow;
 
@@ -235,13 +235,13 @@ FROM generate_series(1994, 2023) AS y;
 
 -- Insertion des données nationales
 INSERT INTO Trade(
-    id_Country, id_Indicator, id_CTS, id_Trade_Flaw, id_Year, trade_value
+    id_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year, trade_value
 )
 SELECT
     c.id_Country,
     i.id_Indicator,
     cts.id_CTS,
-    tf.id_Trade_Flaw,
+    tf.id_Trade_Flow,
     y.id_Year,
     flat.trade_value
 FROM (
@@ -263,7 +263,7 @@ FROM (
     FROM tmp_trade_data td
 ) AS flat
 JOIN Country c ON c.Country = flat.Country
-JOIN Indicator i ON i.Indicator_ = flat.Indicator
+JOIN Indicator i ON i.Indicator = flat.Indicator
 JOIN CTS cts ON cts.CTS_Code = flat.CTS_Code
 JOIN Trade_Flow tf ON tf.Trade_Flow = flat.Trade_Flow
 JOIN Year y ON y.id_Year = flat.year_year
@@ -272,14 +272,14 @@ WHERE flat.trade_value IS NOT NULL;
 -- Bilateral_Trade
 INSERT INTO Bilateral_Trade(
     id_Country, id_Conterpart_country,id_Indicator,
-    id_CTS, id_Trade_Flaw, id_Year, trade_value
+    id_CTS, id_Trade_Flow, id_Year, trade_value
 )
 SELECT
     c1.id_Country, 
     c2.id_Country,
     i.id_Indicator,
     cts.id_CTS,
-    tf.id_Trade_Flaw,
+    tf.id_Trade_Flow,
     y.id_Year,
     flat.trade_value
 FROM (
@@ -303,7 +303,7 @@ FROM (
 ) AS flat
 JOIN Country c1 ON c1.Country = flat.Country
 JOIN Country c2 ON c2.Country = flat.Counterpart_Country
-JOIN Indicator i ON i.Indicator_ = flat.Indicator
+JOIN Indicator i ON i.Indicator = flat.Indicator
 JOIN CTS cts ON cts.CTS_Code = flat.CTS_Code
 JOIN Trade_Flow tf ON tf.Trade_Flow = flat.Trade_Flow
 JOIN Year y ON y.id_Year = flat.year_year

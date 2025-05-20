@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  18 MAY 2025 20:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  21 MAY 2025 00:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -773,31 +773,59 @@ orchid.sty)
 rounded.sty)
 (C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beameroutertheme
 infolines.sty))
+(C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count346
+\lst@gtempboxa=\box78
+\lst@token=\toks46
+\lst@length=\count347
+\lst@currlwidth=\dimen300
+\lst@column=\count348
+\lst@pos=\count349
+\lst@lostspace=\dimen301
+\lst@width=\dimen302
+\lst@newlines=\count350
+\lst@lineno=\count351
+\lst@maxwidth=\dimen303
+
+(C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+)
+(C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count352
+\lst@skipnumbers=\count353
+\lst@framebox=\box79
+)
+(C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+
 (C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2025-03-14 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count346
+\l__color_backend_stack_int=\count354
 ) (slide_conception.aux)
 \openout1 = `slide_conception.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -837,17 +865,17 @@ LaTeX Font Info:    ... okay on input line 33.
 (C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count347
-\scratchdimen=\dimen300
-\scratchbox=\box78
-\nofMPsegments=\count348
-\nofMParguments=\count349
-\everyMPshowfont=\toks46
-\MPscratchCnt=\count350
-\MPscratchDim=\dimen301
-\MPnumerator=\count351
-\makeMPintoPDFobject=\count352
-\everyMPtoPDFconversion=\toks47
+\scratchcounter=\count355
+\scratchdimen=\dimen304
+\scratchbox=\box80
+\nofMPsegments=\count356
+\nofMParguments=\count357
+\everyMPshowfont=\toks47
+\MPscratchCnt=\count358
+\MPscratchDim=\dimen305
+\MPnumerator=\count359
+\makeMPintoPDFobject=\count360
+\everyMPtoPDFconversion=\toks48
 )
 (C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -859,63 +887,63 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 33.
+Package hyperref Info: Link coloring OFF on input line 47.
  (slide_conception.out) (slide_conception.out)
 \@outlinefile=\write5
 \openout5 = `slide_conception.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 33.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 47.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 33.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 47.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 33.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 33.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 33.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 33.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 33.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 33.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 33.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 33.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 47.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 33.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 33.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 47.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 33.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 47.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 33.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 33.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 33.
+(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 33.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 33.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 47.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 33.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 33.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 47.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 47.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 3
-3.
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 4
+7.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 3
-3.
+(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 4
+7.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
-ut line 33.
+ut line 47.
 
 (C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-b
 asic-dictionary-English.dict
@@ -940,7 +968,9 @@ Dictionary: translator-numbers-dictionary, Language: English
 (C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-t
 heorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
-) (slide_conception.nav)
+)
+\c@lstlisting=\count361
+ (slide_conception.nav)
 
 [1
 
@@ -1015,13 +1045,41 @@ Dictionary: translator-theorem-dictionary, Language: English
 
 ]
 
+pdfTeX warning: pdflatex (file ../schema_ea/schema_EA_initial.pdf): PDF inclusi
+on: found PDF version <1.7>, but at most version <1.5> allowed
+<../schema_ea/schema_EA_initial.pdf, id=201, 845.07724pt x 597.55246pt>
+File: ../schema_ea/schema_EA_initial.pdf Graphic file (type pdf)
+<use ../schema_ea/schema_EA_initial.pdf>
+Package pdftex.def Info: ../schema_ea/schema_EA_initial.pdf  used on input line
+ 129.
+(pdftex.def)             Requested size: 273.83728pt x 193.6278pt.
+
+Overfull \vbox (2.76834pt too high) detected at line 129
+ []
+
+
+
 [19
 
-]
+ <../schema_ea/schema_EA_initial.pdf>]
+
+pdfTeX warning: pdflatex (file ../schema_ea/schema_EA_final.pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<../schema_ea/schema_EA_final.pdf, id=246, 845.07718pt x 597.19106pt>
+File: ../schema_ea/schema_EA_final.pdf Graphic file (type pdf)
+<use ../schema_ea/schema_EA_final.pdf>
+Package pdftex.def Info: ../schema_ea/schema_EA_final.pdf  used on input line 1
+39.
+(pdftex.def)             Requested size: 273.83728pt x 193.51071pt.
+
+Overfull \vbox (2.65125pt too high) detected at line 139
+ []
+
+
 
 [20
 
-]
+ <../schema_ea/schema_EA_final.pdf>]
 
 [21
 
@@ -1050,16 +1108,10 @@ Dictionary: translator-theorem-dictionary, Language: English
 [27
 
 ]
-\openout4 = `slide_conception.vrb'.
-
- (slide_conception.vrb)
 
 [28
 
 ]
-\openout4 = `slide_conception.vrb'.
-
- (slide_conception.vrb)
 
 [29
 
@@ -1087,34 +1139,46 @@ Dictionary: translator-theorem-dictionary, Language: English
 ]
 \openout4 = `slide_conception.vrb'.
 
- (slide_conception.vrb
-Overfull \hbox (2.62596pt too wide) in paragraph at lines 16--16
-[]    \OT1/cmtt/m/n/10.95 id_Indicator INTEGER REFERENCES Indicator(id_Indicato
-r),[] 
- []
-
-)
+ (slide_conception.vrb)
 
 [33
 
 ]
 \openout4 = `slide_conception.vrb'.
 
- (slide_conception.vrb
-Overfull \hbox (2.62596pt too wide) in paragraph at lines 13--13
-[]    \OT1/cmtt/m/n/10.95 id_Indicator INTEGER REFERENCES Indicator(id_Indicato
-r),[] 
- []
-
-)
+ (slide_conception.vrb)
 
 [34
 
 ]
+\openout4 = `slide_conception.vrb'.
+
+ (slide_conception.vrb
+Overfull \hbox (8.37465pt too wide) in paragraph at lines 14--14
+[]    \OT1/cmtt/m/n/10.95 id_Indicator SMALLINT REFERENCES Indicator(id_Indicat
+or),[] 
+ []
+
+
+Overfull \hbox (8.37465pt too wide) in paragraph at lines 14--14
+[]                \OT1/cmtt/m/n/10.95 id_Indicator, id_CTS, id_Trade_Flaw, id_Y
+ear)[] 
+ []
+
+)
 
 [35
 
 ]
+\openout4 = `slide_conception.vrb'.
+
+ (slide_conception.vrb
+Overfull \hbox (8.37465pt too wide) in paragraph at lines 13--13
+[]    \OT1/cmtt/m/n/10.95 id_Indicator SMALLINT REFERENCES Indicator(id_Indicat
+or),[] 
+ []
+
+)
 
 [36
 
@@ -1129,6 +1193,68 @@ r),[]
 ]
 
 [39
+
+]
+
+[40
+
+]
+\openout4 = `slide_conception.vrb'.
+
+ (slide_conception.vrb
+(C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2024/09/23 1.10c listings language file
+))
+
+[41
+
+]
+<./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png, id=
+433, 3426.8025pt x 1264.725pt>
+File: ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png
+ Graphic file (type png)
+<use ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png>
+
+Package pdftex.def Info: ./Images/Évolution_des_importations_mondiales_par_ann
+ée_bas-corbone.png  used on input line 367.
+(pdftex.def)             Requested size: 342.2953pt x 126.32552pt.
+
+
+[42
+
+ <./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png>]
+\openout4 = `slide_conception.vrb'.
+
+ (slide_conception.vrb
+<./Images/jointure.jpg, id=444, 536.0025pt x 292.09125pt>
+File: ./Images/jointure.jpg Graphic file (type jpg)
+<use ./Images/jointure.jpg>
+Package pdftex.def Info: ./Images/jointure.jpg  used on input line 4.
+(pdftex.def)             Requested size: 342.2953pt x 186.52771pt.
+)
+
+[43
+
+ <./Images/jointure.jpg>]
+<./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg, id=453,
+ 489.32813pt x 133.24782pt>
+File: ./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg Gra
+phic file (type jpg)
+<use ./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg>
+Package pdftex.def Info: ./Images/Top_5_technologies_les_plus_échangées_par_t
+ype_de_flux.jpg  used on input line 385.
+(pdftex.def)             Requested size: 342.2953pt x 93.21182pt.
+
+
+[44
+
+ <./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg>]
+
+[45
+
+]
+
+[46
 
 ]
 \tf@nav=\write6
@@ -1149,13 +1275,13 @@ Package rerunfilecheck Info: File `slide_conception.out' has not changed.
 (rerunfilecheck)             Checksum: 8B5FF8145C6C61292974591417BB2076;1200.
  ) 
 Here is how much of TeX's memory you used:
- 21890 strings out of 469959
- 428820 string characters out of 5469834
- 776746 words of memory out of 5000000
- 48147 multiletter control sequences out of 15000+600000
+ 23879 strings out of 469959
+ 457724 string characters out of 5469834
+ 1043513 words of memory out of 5000000
+ 50103 multiletter control sequences out of 15000+600000
  630686 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,16n,123p,393b,647s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,16n,123p,393b,1490s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Darck\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcss
 1095.pk><C:/Users/Darck/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmss10.pfb><C:/Users/Darck/AppData/Local/Programs/MiKTeX/fonts/type1/publ
@@ -1164,9 +1290,9 @@ ype1/public/amsfonts/cm/cmss8.pfb><C:/Users/Darck/AppData/Local/Programs/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/Darck/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Darck/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on slide_conception.pdf (39 pages, 178682 bytes).
+Output written on slide_conception.pdf (46 pages, 963836 bytes).
 PDF statistics:
- 406 PDF objects out of 1000 (max. 8388607)
- 85 named destinations out of 1000 (max. 500000)
- 157 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 527 PDF objects out of 1000 (max. 8388607)
+ 99 named destinations out of 1000 (max. 500000)
+ 182 words of extra memory for PDF output out of 10000 (max. 10000000)
 

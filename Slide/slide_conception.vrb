@@ -1,13 +1,6 @@
-\frametitle{Création de la table \texttt{Donnee\_Pays}}
-\begin{verbatim}
-CREATE TABLE Donnee_Pays (
-    id_Country INTEGER REFERENCES Country(id_Country),
-    id_Indicator INTEGER REFERENCES Indicator(id_Indicator),
-    id_CTS INTEGER REFERENCES CTS(id_CTS),
-    id_Trade INTEGER REFERENCES Trade_Flow(id_Trade),
-    id_Year INTEGER REFERENCES Year(id_Year),
-    trade_value DOUBLE PRECISION,
-    PRIMARY KEY(id_Country, id_Indicator, id_CTS,
-    id_Trade, id_Year)
-);
-\end{verbatim}
+\frametitle{Relation Tableau – Top 5 technologies}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{./Images/jointure}
+    \caption{Relations établie sur Tableau Desktop}
+  \end{figure}

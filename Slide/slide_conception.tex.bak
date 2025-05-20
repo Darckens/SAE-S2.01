@@ -20,6 +20,20 @@
   \vskip0pt%
 }
 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{sqlStyle}{
+  language=SQL,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{teal},
+  commentstyle=\color{gray},
+  morekeywords={SUM, USING, JOIN, GROUP, ORDER, BY},
+  breaklines=true,
+  captionpos=b
+}
+
 \setbeamertemplate{navigation symbols}{}
 \setbeamercovered{transparent}
 
@@ -27,7 +41,7 @@
 \subtitle{S2.01 Conception et implémentation d'une base de données}
 
 \author[Ibrahim BENKHERFELLAH \and Axel COULET]{Ibrahim BENKHERFELLAH \and Axel COULET}
-\institute[USPN]{Université Sorbonne Paris Nord \\}
+\institute[USPN]{Université Sorbonne Paris Nord \\ \\ BUT1 SD \- Semestre 2}
 \date[\today]{\today}
 
 \begin{document}
@@ -94,25 +108,45 @@
 \begin{frame}
   \frametitle{Données structurées et décisions clés}
   \begin{itemize}
-    \item<1-> Création d'une table \texttt{echanger\_avec} pour les données bilatérales :
+    \item<1-> Création d'une table \texttt{Bilateral\_Trade} pour les données bilatérales :
     \begin{itemize}
       \item Relation réflexive entre deux pays (deux clés étrangères vers \texttt{country}).
-      \item Attribution de \texttt{pays\_origine} selon le sens du flux.
     \end{itemize}
-    \item<2-> Table \texttt{donnee\_pays} pour les données nationales.
+    \item<2-> Table \texttt{Trade} pour les données nationales.
     \item<3-> Lien systématique aux dimensions : pays, indicateur, catégorie, année.
   \end{itemize}
 \end{frame}
 
 \section{Modélisation de la base de données}
+
+\begin{frame}
+	\frametitle{Schéma Entité-Association}
+	
+	\begin{figure}
+		\includegraphics[width=0.8\linewidth]{../schema_ea/schema_EA_initial.pdf}
+		\caption{Schéma Entité-Association Initial}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Schéma Entité-Association}
+	
+	\begin{figure}
+		\includegraphics[width=0.8\linewidth]{../schema_ea/schema_EA_final.pdf}
+		\caption{Schéma Entité-Association Final}
+	\end{figure}
+\end{frame}
+
+
 \begin{frame}
   \frametitle{Modèle conceptuel (EA)}
   \begin{itemize}
     \item<1-> Type Entités : \texttt{Country}, \texttt{Indicator}, \texttt{CTS}, \texttt{Trade\_Flow}, \texttt{Year}
     \item<2-> Type Associations : 
       \begin{itemize}
-        \item \texttt{Échanger\_Avec} (réflexive sur \texttt{Country})
-        \item \texttt{Donnée\_Pays} (relation simple avec agrégation)
+        \item \texttt{Bilateral\_Trade} (réflexive sur \texttt{Country})
+        \item \texttt{Trade} (relation simple avec agrégation)
       \end{itemize}
     \item<3-> Justification des cardinalités et des relations
     \item<4-> Illustration du schéma : 
@@ -124,13 +158,13 @@
   \begin{itemize}
     \item Schéma relationnel résultant de la modélisation EA :
     \begin{itemize}
-      \item \texttt{country(idCountry, Country, ISO2, ISO3)}
-      \item \texttt{cts(idCTS, CTS\_Code, CTS\_Name, CTS\_Full\_Descriptor)}
-      \item \texttt{trade\_flow(idTrade, Trade\_Flow, Scale)}
-      \item \texttt{indicator(idIndicator, Indicator\_, Source, Units)}
-      \item \texttt{year(id\_Year, Year)}
-      \item \texttt{echanger\_avec(id\_country\_1, id\_country\_2, pays\_origine, id\_indicator, id\_cts, id\_trade, id\_year, trade\_value)}
-      \item \texttt{donnee\_pays(id\_country, id\_indicator, id\_cts, id\_trade, id\_year, trade\_value)}
+      \item \texttt{Country(idCountry, Country, ISO2, ISO3)}
+      \item \texttt{CTS(idCTS, CTS\_Code, CTS\_Name, CTS\_Full\_Descriptor)}
+      \item \texttt{Trade\_Flow(id\_Trade\_Flaw, Trade\_Flow, Scale)}
+      \item \texttt{Indicator(idIndicator, Indicator\_, Source, Units)}
+      \item \texttt{Year(id\_Year, Year)}
+      \item \texttt{Bilateral\_Trade(id\_country, id\_counterpart, id\_indicator, id\_cts, id\_Trade\_Flaw, id\_year, trade\_value)}
+      \item \texttt{Trade(id\_country, id\_indicator, id\_cts, id\_Trade\_Flaw, id\_year, trade\_value)}
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -160,7 +194,7 @@
   \begin{itemize}
     \item Le schéma est en 2NF.
     \item Suppression des dépendances transitives.
-    \item Exemple : l’unité d’un indicateur dépend directement de \texttt{indicator}, pas d’un pays ou d’un code CTS.
+    \item Exemple : l’unité d’un indicateur dépend uniquement de l’indicateur, pas d’un pays ou autre entité.
     \item \textbf{Conclusion} : toutes les colonnes non-clés dépendent uniquement de la clé primaire → \textbf{schéma en 3NF}.
   \end{itemize}
 \end{frame}
@@ -169,18 +203,19 @@
   \frametitle{Forme normale : BCNF}
   \begin{itemize}
     \item Toutes les dépendances fonctionnelles ont un antécédent qui est une super-clé.
-    \item Exemple : dans \texttt{echanger\_avec}, seule la combinaison complète des identifiants détermine \texttt{trade\_value}.
+    \item Exemple : dans \texttt{Bilateral\_Trade}, seule la combinaison complète des identifiants détermine \texttt{trade\_value}.
     \item Il n'existe pas de dépendance fonctionnelle violant cette condition.
     \item \textbf{Conclusion} : le schéma respecte la forme normale de \textbf{Boyce-Codd (BCNF)}.
   \end{itemize}
 \end{frame}
+
 
 \section{Script de création et peuplement SQL}
 \begin{frame}[fragile]
   \frametitle{Création de la table \texttt{Country}}
 \begin{verbatim}
 CREATE TABLE Country(
-   id_Country INTEGER PRIMARY KEY,
+   id_Country SMALLINT PRIMARY KEY,
    Country VARCHAR(50),
    ISO2 CHAR(2),
    ISO3 CHAR(3)
@@ -192,10 +227,11 @@ CREATE TABLE Country(
   \frametitle{Création de la table \texttt{Indicator}}
 \begin{verbatim}
 CREATE TABLE Indicator(
-   id_Indicator INTEGER PRIMARY KEY,
-   Indicator_ VARCHAR(80),
+   id_Indicator SMALLINT PRIMARY KEY,
+   Indicator VARCHAR(80),
    Source VARCHAR,
-   Units VARCHAR(50)
+   Units VARCHAR(50),
+   Scale VARCHAR(5)
 );
 \end{verbatim}
 \end{frame}
@@ -204,7 +240,7 @@ CREATE TABLE Indicator(
   \frametitle{Création de la table \texttt{CTS}}
 \begin{verbatim}
 CREATE TABLE CTS(
-   id_CTS INTEGER PRIMARY KEY,
+   id_CTS SMALLINT PRIMARY KEY,
    CTS_Code VARCHAR(6),
    CTS_Name VARCHAR(100),
    CTS_Full_Descriptor VARCHAR(150)
@@ -216,9 +252,8 @@ CREATE TABLE CTS(
   \frametitle{Création de la table \texttt{Trade\_Flow}}
 \begin{verbatim}
 CREATE TABLE Trade_Flow(
-   id_Trade INTEGER PRIMARY KEY,
-   Trade_Flow VARCHAR(20),
-   Scale VARCHAR(5)
+   id_Trade_Flow SMALLINT PRIMARY KEY,
+   Trade_Flow VARCHAR(20)
 );
 \end{verbatim}
 \end{frame}
@@ -227,7 +262,7 @@ CREATE TABLE Trade_Flow(
   \frametitle{Création de la table \texttt{Year}}
 \begin{verbatim}
 CREATE TABLE Year(
-   id_Year INTEGER PRIMARY KEY,
+   id_Year SMALLINT PRIMARY KEY,
    Year DATE
 );
 \end{verbatim}
@@ -236,18 +271,16 @@ CREATE TABLE Year(
 \begin{frame}[fragile]
   \frametitle{Création de la table \texttt{Echanger\_Avec}}
 \begin{verbatim}
-CREATE TABLE Echanger_Avec (
-    id_Country_1 INTEGER REFERENCES Country(id_Country),
-    id_Country_2 INTEGER REFERENCES Country(id_Country),
-    Pays_Origine INTEGER REFERENCES Country(id_Country),
-    id_Indicator INTEGER REFERENCES Indicator(id_Indicator),
-    id_CTS INTEGER REFERENCES CTS(id_CTS),
-    id_Trade INTEGER REFERENCES Trade_Flow(id_Trade),
-    id_Year INTEGER REFERENCES Year(id_Year),
+CREATE TABLE Bilateral\_Trade (
+    id_Country SMALLINT REFERENCES Country(id_Country),
+    id_Counterpart SMALLINT REFERENCES Country(id_Country),
+    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(...),
+    id_Year SMALLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
-    PRIMARY KEY(id_Country_1, id_Country_2, Pays_Origine,
-                id_Indicator, id_CTS, id_Trade, id_Year),
-    CHECK (id_Country_1 < id_Country_2)
+    PRIMARY KEY(id_Country, id_Counterpart_Country,
+                id_Indicator, id_CTS, id_Trade_Flaw, id_Year)
 );
 \end{verbatim}
 \end{frame}
@@ -255,15 +288,15 @@ CREATE TABLE Echanger_Avec (
 \begin{frame}[fragile]
   \frametitle{Création de la table \texttt{Donnee\_Pays}}
 \begin{verbatim}
-CREATE TABLE Donnee_Pays (
-    id_Country INTEGER REFERENCES Country(id_Country),
-    id_Indicator INTEGER REFERENCES Indicator(id_Indicator),
-    id_CTS INTEGER REFERENCES CTS(id_CTS),
-    id_Trade INTEGER REFERENCES Trade_Flow(id_Trade),
-    id_Year INTEGER REFERENCES Year(id_Year),
+CREATE TABLE Trade (
+    id_Country SMALLINT REFERENCES Country(id_Country),
+    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(...),
+    id_Year SMALLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Indicator, id_CTS, 
-    id_Trade, id_Year)
+    id_Trade_Flaw, id_Year)
 );
 \end{verbatim}
 \end{frame}
@@ -272,25 +305,29 @@ CREATE TABLE Donnee_Pays (
 \begin{frame}
   \frametitle{Peuplement de la base}
   \begin{itemize}
-    \item Utilisation de \texttt{COPY}, \texttt{INSERT INTO} avec jointures.
-    \item Alignement avec les traitements Python (\texttt{melt + filtering}).
-    \item Cas particuliers traités : 
+    \item<1-> Utilisation de \texttt{COPY}, \texttt{INSERT INTO} avec jointures.
+    \item<1-> Alignement avec les traitements Python (\texttt{Avec .stack()}).
+    \item<1-> Cas particuliers traités : 
       \begin{itemize}
         \item Échanges d’un pays avec lui-même
         \item Lignes \texttt{NULL} / Trade Flow = Not Applicable
       \end{itemize}
-    \item Difficultés rencontrées : [à compléter]
-  \end{itemize}
+    \item<2-> Difficultés rencontrées :
+    	\begin{itemize}
+  			\item Contraintes techniques : \texttt{NULL}, unicité, jointures complexes.
+  			\item Problèmes de données : fusion sans doublons, nettoyage, volume élevé.
+		\end{itemize}
+    \end{itemize}
 \end{frame}
 
 \section{Interrogation et visualisation des données}
 \begin{frame}
   \frametitle{Requêtes d’analyse}
   \begin{itemize}
-    \item Nombre d’échanges par année
-    \item Top pays exportateurs/importateurs
-    \item Évolution des indicateurs par catégorie CTS
-    \item Comparaison SQL to CSV avec Python
+    \item Évolution annuelle des importations mondiales de technologies bas-carbone.
+    \item Top 5 technologies les plus échangées par type de flux
+    \item Top pays exportateurs par valeur totale échangée (3 dernières années)
+    \item Comparaison des échanges bilatéraux vs nationaux sur une année donnée
   \end{itemize}
 \end{frame}
 
@@ -300,19 +337,62 @@ CREATE TABLE Donnee_Pays (
     \item Utilisation de Metabase pour interroger la BD
     \item Utilisation de Tableau pour valider les valeurs issues du CSV
     \item Comparaison SQL / Python → vérification de l’intégrité
-    \item Exemples visuels : [insérer graphiques ou screenshots]
+    \item Exemples visuels :
   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Requête SQL – Importations bas carbone}
+  \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour les importations de technologies bas carbone}]
+SELECT year, SUM(trade_value) AS "Valeur des importations (en millions USD)"
+FROM Trade
+JOIN year y USING(id_year)
+JOIN indicator USING(id_indicator)
+JOIN trade_flow USING(id_trade_flow)
+WHERE trade_flow = 'Imports'
+  AND indicator = 'Imports of low carbon technology products'
+GROUP BY year
+ORDER BY year;
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Visualisation}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{./Images/Évolution_des_importations_mondiales_par_année_bas-corbone}
+    \caption{Évolution annuelle des importations mondiales de technologies bas-carbone}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Relation Tableau – Top 5 technologies}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{./Images/jointure}
+    \caption{Relations établie sur Tableau Desktop}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Visualisation}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux}
+    \caption{Évolution annuelle des importations mondiales de technologies bas-carbone}
+  \end{figure}
 \end{frame}
 
 \section{Conclusion}
 \begin{frame}
   \frametitle{Bilan du projet}
   \begin{itemize}
-    \item Base de données fonctionnelle et fidèle au CSV
+    \item Base de données fonctionnelle et fidèle au CSV (dans nos rêves)
     \item Respect des étapes du processus de modélisation
     \item Difficultés sur l’import (pivot, valeurs nulles, sens du flux)
     \item Vérification croisée avec Python
-    \item Améliorations possibles : [à compléter]
+    \item Améliorations possibles :
   \end{itemize}
 \end{frame}
 
