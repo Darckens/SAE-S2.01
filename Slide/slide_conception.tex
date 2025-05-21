@@ -75,7 +75,11 @@
     \item<2-> Exploration initiale avec Python (pandas) : \\
           \texttt{.head()}, \texttt{.info()}, etc.
     \item<3-> Identification de colonnes clés : \texttt{CTS\_Code}, \texttt{Indicator}, \texttt{Trade\_Flow}, etc.
-    \item<4-> Difficultés rencontrées : [à compléter]
+    \item<4-> Difficultés rencontrées :
+    	\begin{itemize}
+    	\item Colonnes de dates (comme Year) au mauvais format ou non reconnues comme Date.
+    	\item Colonnes "F1994" à "F2023" en format long à dépivoter (via \text{UNPIVOT} de SQL).
+    	\end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -149,7 +153,6 @@
         \item \texttt{Trade} (relation simple avec agrégation)
       \end{itemize}
     \item<3-> Justification des cardinalités et des relations
-    \item<4-> Illustration du schéma : 
   \end{itemize}
 \end{frame}
 
@@ -269,9 +272,9 @@ CREATE TABLE Year(
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Création de la table \texttt{Echanger\_Avec}}
+  \frametitle{Création de la table \texttt{Bilateral\_Trade}}
 \begin{verbatim}
-CREATE TABLE Bilateral\_Trade (
+CREATE TABLE Bilateral_Trade (
     id_Country SMALLINT REFERENCES Country(id_Country),
     id_Counterpart SMALLINT REFERENCES Country(id_Country),
     id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
@@ -286,7 +289,7 @@ CREATE TABLE Bilateral\_Trade (
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Création de la table \texttt{Donnee\_Pays}}
+  \frametitle{Création de la table \texttt{Trade}}
 \begin{verbatim}
 CREATE TABLE Trade (
     id_Country SMALLINT REFERENCES Country(id_Country),
@@ -375,12 +378,72 @@ ORDER BY year;
   \end{figure}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Visualisation}
+\begin{frame}[fragile]
+  \frametitle{Relation Tableau – Top 5 technologies}
   \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux}
-    \caption{Évolution annuelle des importations mondiales de technologies bas-carbone}
+    \caption{Top 5 technologies les plus échangées par type de flux}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Requête SQL – Top 10 pays exportateurs}
+  \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour Top 10 pays exportateurs}]
+SELECT 
+  country AS pays_exportateur,
+  ROUND(SUM(trade_value)) AS total_exports
+FROM bilateral_trade
+JOIN country ON id_conterpart_country = country.id_country
+JOIN trade_flow USING(id_trade_flow)
+JOIN year USING(id_year)
+JOIN indicator USING(id_indicator)
+WHERE indicator = 'Exports of low carbon technology products'
+  AND trade_flow = 'Exports'
+  AND units ~* '[.*dollar]'
+  AND EXTRACT(YEAR FROM year) >= 2021
+GROUP BY country
+ORDER BY total_exports DESC
+LIMIT 10;
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Relation Tableau – Top 5 technologies}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_années)}
+    \caption{Top 10 pays exportateurs par valeur totale échangée (3 dernières années)}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Requête SQL – Échanges Bilatéraux VS Nationaux}
+  \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour Échanges Bilatéraux VS Nationaux}]
+WITH totals AS (
+  SELECT
+    y.year,
+    SUM(t.trade_value) AS total_trade,
+    SUM(bt.trade_value) AS total_bilateral
+  FROM year AS y
+  LEFT JOIN trade AS t ON t.id_year = y.id_year
+    AND t.id_indicator IN (
+      SELECT id_indicator FROM indicator WHERE units ILIKE '%dollar%'
+    )
+  LEFT JOIN bilateral_trade AS bt ON bt.id_year = y.id_year
+    AND bt.id_indicator IN (
+      SELECT id_indicator FROM indicator WHERE units ILIKE '%dollar%'
+  ...
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Relation Tableau – Top 5 technologies}
+  \begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{./Images/échanges_bilatéraux_VS_nationaux}
+    \caption{Comparaison des échanges Bilatéraux VS Nationaux}
   \end{figure}
 \end{frame}
 
