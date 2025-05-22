@@ -1,6 +1,6 @@
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
 \beamer@sectionintoc {2}{Exploration et compréhension des données}{6}{0}{2}
-\beamer@sectionintoc {3}{Modélisation de la base de données}{19}{0}{3}
-\beamer@sectionintoc {4}{Script de création et peuplement SQL}{29}{0}{4}
-\beamer@sectionintoc {5}{Interrogation et visualisation des données}{38}{0}{5}
-\beamer@sectionintoc {6}{Conclusion}{48}{0}{6}
+\beamer@sectionintoc {3}{Modélisation de la base de données}{20}{0}{3}
+\beamer@sectionintoc {4}{Script de création et peuplement SQL}{30}{0}{4}
+\beamer@sectionintoc {5}{Interrogation et visualisation des données}{39}{0}{5}
+\beamer@sectionintoc {6}{Conclusion}{49}{0}{6}

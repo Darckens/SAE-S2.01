@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  21 MAY 2025 12:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  22 MAY 2025 19:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1032,6 +1032,25 @@ Dictionary: translator-theorem-dictionary, Language: English
 [15
 
 ]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 147
+.
+ (C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 147
+.
+
+(C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inp
+ut line 147.
+
+(C:\Users\Darck\AppData\Local\Programs\MiKTeX\tex/latex/sansmathaccent\ot1mathk
+erncmss.fd
+File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/ma
+thkerncmss.
+)
 
 [16
 
@@ -1045,45 +1064,45 @@ Dictionary: translator-theorem-dictionary, Language: English
 
 ]
 
+[19
+
+]
+
 pdfTeX warning: pdflatex (file ../schema_ea/schema_EA_initial.pdf): PDF inclusi
 on: found PDF version <1.7>, but at most version <1.5> allowed
-<../schema_ea/schema_EA_initial.pdf, id=201, 845.07724pt x 597.55246pt>
+<../schema_ea/schema_EA_initial.pdf, id=211, 845.07724pt x 597.55246pt>
 File: ../schema_ea/schema_EA_initial.pdf Graphic file (type pdf)
 <use ../schema_ea/schema_EA_initial.pdf>
 Package pdftex.def Info: ../schema_ea/schema_EA_initial.pdf  used on input line
- 133.
+ 172.
 (pdftex.def)             Requested size: 273.83728pt x 193.6278pt.
 
-Overfull \vbox (2.76834pt too high) detected at line 133
- []
-
-
-
-[19
-
- <../schema_ea/schema_EA_initial.pdf>]
-
-pdfTeX warning: pdflatex (file ../schema_ea/schema_EA_final.pdf): PDF inclusion
-: found PDF version <1.7>, but at most version <1.5> allowed
-<../schema_ea/schema_EA_final.pdf, id=246, 845.07718pt x 597.19106pt>
-File: ../schema_ea/schema_EA_final.pdf Graphic file (type pdf)
-<use ../schema_ea/schema_EA_final.pdf>
-Package pdftex.def Info: ../schema_ea/schema_EA_final.pdf  used on input line 1
-43.
-(pdftex.def)             Requested size: 273.83728pt x 193.51071pt.
-
-Overfull \vbox (2.65125pt too high) detected at line 143
+Overfull \vbox (2.76834pt too high) detected at line 172
  []
 
 
 
 [20
 
- <../schema_ea/schema_EA_final.pdf>]
+ <../schema_ea/schema_EA_initial.pdf>]
+
+pdfTeX warning: pdflatex (file ../schema_ea/schema_EA_final.pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<../schema_ea/schema_EA_final.pdf, id=255, 845.07718pt x 597.19106pt>
+File: ../schema_ea/schema_EA_final.pdf Graphic file (type pdf)
+<use ../schema_ea/schema_EA_final.pdf>
+Package pdftex.def Info: ../schema_ea/schema_EA_final.pdf  used on input line 1
+82.
+(pdftex.def)             Requested size: 273.83728pt x 193.51071pt.
+
+Overfull \vbox (2.65125pt too high) detected at line 182
+ []
+
+
 
 [21
 
-]
+ <../schema_ea/schema_EA_final.pdf>]
 
 [22
 
@@ -1112,9 +1131,6 @@ Overfull \vbox (2.65125pt too high) detected at line 143
 [28
 
 ]
-\openout4 = `slide_conception.vrb'.
-
- (slide_conception.vrb)
 
 [29
 
@@ -1149,6 +1165,13 @@ Overfull \vbox (2.65125pt too high) detected at line 143
 ]
 \openout4 = `slide_conception.vrb'.
 
+ (slide_conception.vrb)
+
+[34
+
+]
+\openout4 = `slide_conception.vrb'.
+
  (slide_conception.vrb
 Overfull \hbox (8.37465pt too wide) in paragraph at lines 14--14
 []    \OT1/cmtt/m/n/10.95 id_Indicator SMALLINT REFERENCES Indicator(id_Indicat
@@ -1163,7 +1186,7 @@ ear)[]
 
 )
 
-[34
+[35
 
 ]
 \openout4 = `slide_conception.vrb'.
@@ -1175,10 +1198,6 @@ or),[]
  []
 
 )
-
-[35
-
-]
 
 [36
 
@@ -1195,6 +1214,10 @@ or),[]
 [39
 
 ]
+
+[40
+
+]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
@@ -1202,40 +1225,40 @@ or),[]
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 ))
 
-[40
+[41
 
 ]
 <./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png, id=
-427, 3426.8025pt x 1264.725pt>
+435, 3426.8025pt x 1264.725pt>
 File: ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png
  Graphic file (type png)
 <use ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png>
 
 Package pdftex.def Info: ./Images/Évolution_des_importations_mondiales_par_ann
-ée_bas-corbone.png  used on input line 370.
+ée_bas-corbone.png  used on input line 409.
 (pdftex.def)             Requested size: 342.2953pt x 126.32552pt.
 
 
-[41
+[42
 
  <./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png>]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-<./Images/jointure.jpg, id=438, 532.99126pt x 289.68225pt>
+<./Images/jointure.jpg, id=446, 532.99126pt x 289.68225pt>
 File: ./Images/jointure.jpg Graphic file (type jpg)
 <use ./Images/jointure.jpg>
 Package pdftex.def Info: ./Images/jointure.jpg  used on input line 4.
 (pdftex.def)             Requested size: 342.2953pt x 186.04576pt.
 )
 
-[42
+[43
 
  <./Images/jointure.jpg>]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-<./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg, id=447,
+<./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg, id=456,
  488.42474pt x 119.2455pt>
 File: ./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg Gra
 phic file (type jpg)
@@ -1245,26 +1268,26 @@ ype_de_flux.jpg  used on input line 4.
 (pdftex.def)             Requested size: 342.2953pt x 83.57133pt.
 )
 
-[43
+[44
 
  <./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg>]
 \openout4 = `slide_conception.vrb'.
 
 
 (slide_conception.vrb)
-Overfull \vbox (2.32526pt too high) detected at line 409
+Overfull \vbox (2.32526pt too high) detected at line 448
  []
 
 
 
-[44
+[45
 
 ]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
 <./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_ann�
-�es).jpg, id=465, 1106.9355pt x 404.712pt>
+�es).jpg, id=473, 1106.9355pt x 404.712pt>
 File: ./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières
 _années).jpg Graphic file (type jpg)
 <use ./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_
@@ -1274,25 +1297,25 @@ ngée_(3_dernières_années).jpg  used on input line 4.
 (pdftex.def)             Requested size: 342.2953pt x 125.15065pt.
 )
 
-[45
+[46
 
  <./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_ann
 ées).jpg>]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb)
-Overfull \vbox (3.66695pt too high) detected at line 439
+Overfull \vbox (3.66695pt too high) detected at line 478
  []
 
 
 
-[46
+[47
 
 ]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-<./Images/échanges_bilatéraux_VS_nationaux.jpg, id=482, 1132.83224pt x 415.55
+<./Images/échanges_bilatéraux_VS_nationaux.jpg, id=490, 1132.83224pt x 415.55
 25pt>
 File: ./Images/échanges_bilatéraux_VS_nationaux.jpg Graphic file (type jpg)
 <use ./Images/échanges_bilatéraux_VS_nationaux.jpg>
@@ -1301,15 +1324,15 @@ on input line 4.
 (pdftex.def)             Requested size: 342.2953pt x 125.56076pt.
 )
 
-[47
+[48
 
  <./Images/échanges_bilatéraux_VS_nationaux.jpg>]
 
-[48
+[49
 
 ]
 
-[49
+[50
 
 ]
 \tf@nav=\write6
@@ -1330,11 +1353,11 @@ Package rerunfilecheck Info: File `slide_conception.out' has not changed.
 (rerunfilecheck)             Checksum: 8B5FF8145C6C61292974591417BB2076;1200.
  ) 
 Here is how much of TeX's memory you used:
- 23945 strings out of 469959
- 460445 string characters out of 5469834
- 1077676 words of memory out of 5000000
- 50153 multiletter control sequences out of 15000+600000
- 630686 words of font info for 54 fonts, out of 8000000 for 9000
+ 24046 strings out of 469959
+ 462697 string characters out of 5469834
+ 1077926 words of memory out of 5000000
+ 50229 multiletter control sequences out of 15000+600000
+ 639113 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,16n,123p,393b,1490s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Darck\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcss
@@ -1343,11 +1366,12 @@ ts/cm/cmss10.pfb><C:/Users/Darck/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmss12.pfb><C:/Users/Darck/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmss8.pfb><C:/Users/Darck/AppData/Local/Programs/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/Darck/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Darck/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on slide_conception.pdf (49 pages, 1164537 bytes).
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Darck/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Darck/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on slide_conception.pdf (50 pages, 1176097 bytes).
 PDF statistics:
- 558 PDF objects out of 1000 (max. 8388607)
- 105 named destinations out of 1000 (max. 500000)
+ 570 PDF objects out of 1000 (max. 8388607)
+ 107 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 

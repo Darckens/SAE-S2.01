@@ -110,6 +110,45 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Transformation des données : format large vers format long}
+
+  \textbf{Format large (wide)} :\newline
+  Chaque année est une colonne
+  
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    ... & Scale & F1994 & F1995 & F1996 \\
+    \hline
+    ... & Units & 190885.0 & 2433262.0 & 17679060.0 \\
+    ... & Units & 0.0004146 & 0.0053298 & 0.0347023 \\
+    ... & Units & 668268200.0 & 612865500.0 & 493126000.0 \\
+    \hline
+  \end{tabular}
+
+  \vspace{1em}
+  \centering
+  $\Downarrow$
+  \vspace{1em}
+
+  \raggedright
+  \textbf{Format long (tidy)} :\newline
+  Chaque ligne correspond à une observation unique (année, valeur).
+
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    ... & Scale & Year & Value \\
+    \hline
+    ... & Units & F1994 & 190885.0 \\
+    ... & Units & F1994 & 0.0004146 \\
+    ... & Units & F1994 & 668268200.0 \\
+    \hline
+  \end{tabular}
+
+\end{frame}
+
+
+
+\begin{frame}
   \frametitle{Données structurées et décisions clés}
   \begin{itemize}
     \item<1-> Création d'une table \texttt{Bilateral\_Trade} pour les données bilatérales :
@@ -161,13 +200,13 @@
   \begin{itemize}
     \item Schéma relationnel résultant de la modélisation EA :
     \begin{itemize}
-      \item \texttt{Country(idCountry, Country, ISO2, ISO3)}
-      \item \texttt{CTS(idCTS, CTS\_Code, CTS\_Name, CTS\_Full\_Descriptor)}
-      \item \texttt{Trade\_Flow(id\_Trade\_Flaw, Trade\_Flow, Scale)}
-      \item \texttt{Indicator(idIndicator, Indicator\_, Source, Units)}
-      \item \texttt{Year(id\_Year, Year)}
-      \item \texttt{Bilateral\_Trade(id\_country, id\_counterpart, id\_indicator, id\_cts, id\_Trade\_Flaw, id\_year, trade\_value)}
-      \item \texttt{Trade(id\_country, id\_indicator, id\_cts, id\_Trade\_Flaw, id\_year, trade\_value)}
+      \item \texttt{Country(\underline{idCountry}, Country, ISO2, ISO3)}
+      \item \texttt{CTS(\underline{idCTS}, CTS\_Code, CTS\_Name, CTS\_Full\_Descriptor)}
+      \item \texttt{Trade\_Flow(\underline{id\_Trade\_Flaw}, Trade\_Flow, Scale)}
+      \item \texttt{Indicator(\underline{idIndicator}, Indicator\_, Source, Units)}
+      \item \texttt{Year(\underline{id\_Year}, Year)}
+      \item \texttt{Bilateral\_Trade(\underline{id\_country}, \underline{id\_counterpart}, \underline{id\_indicator}, \underline{id\_cts}, \underline{id\_Trade\_Flaw}, \underline{id\_year}, trade\_value)}
+      \item \texttt{Trade(\underline{id\_country}, \underline{id\_indicator}, \underline{id\_cts}, \underline{id\_Trade\_Flaw}, \underline{id\_year}, trade\_value)}
     \end{itemize}
   \end{itemize}
 \end{frame}
