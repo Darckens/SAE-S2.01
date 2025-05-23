@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  22 MAY 2025 19:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  23 MAY 2025 18:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1228,24 +1228,24 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 [41
 
 ]
-<./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png, id=
-435, 3426.8025pt x 1264.725pt>
-File: ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png
- Graphic file (type png)
-<use ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png>
+<./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.jpg, id=
+435, 1121.99174pt x 417.35925pt>
+File: ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.jpg
+ Graphic file (type jpg)
+<use ./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.jpg>
 
 Package pdftex.def Info: ./Images/Évolution_des_importations_mondiales_par_ann
-ée_bas-corbone.png  used on input line 409.
-(pdftex.def)             Requested size: 342.2953pt x 126.32552pt.
+ée_bas-corbone.jpg  used on input line 411.
+(pdftex.def)             Requested size: 342.2953pt x 127.3294pt.
 
 
 [42
 
- <./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.png>]
+ <./Images/Évolution_des_importations_mondiales_par_année_bas-corbone.jpg>]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-<./Images/jointure.jpg, id=446, 532.99126pt x 289.68225pt>
+<./Images/jointure.jpg, id=444, 532.99126pt x 289.68225pt>
 File: ./Images/jointure.jpg Graphic file (type jpg)
 <use ./Images/jointure.jpg>
 Package pdftex.def Info: ./Images/jointure.jpg  used on input line 4.
@@ -1258,7 +1258,7 @@ Package pdftex.def Info: ./Images/jointure.jpg  used on input line 4.
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-<./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg, id=456,
+<./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg, id=454,
  488.42474pt x 119.2455pt>
 File: ./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux.jpg Gra
 phic file (type jpg)
@@ -1275,10 +1275,6 @@ ype_de_flux.jpg  used on input line 4.
 
 
 (slide_conception.vrb)
-Overfull \vbox (2.32526pt too high) detected at line 448
- []
-
-
 
 [45
 
@@ -1287,14 +1283,14 @@ Overfull \vbox (2.32526pt too high) detected at line 448
 
  (slide_conception.vrb
 <./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_ann�
-�es).jpg, id=473, 1106.9355pt x 404.712pt>
+�es).jpg, id=471, 1069.596pt x 427.5975pt>
 File: ./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières
 _années).jpg Graphic file (type jpg)
 <use ./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_
 années).jpg>
 Package pdftex.def Info: ./Images/Top_pays_exportateurs_par_valeur_totale_écha
 ngée_(3_dernières_années).jpg  used on input line 4.
-(pdftex.def)             Requested size: 342.2953pt x 125.15065pt.
+(pdftex.def)             Requested size: 342.2953pt x 136.84052pt.
 )
 
 [46
@@ -1304,7 +1300,7 @@ ngée_(3_dernières_années).jpg  used on input line 4.
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb)
-Overfull \vbox (3.66695pt too high) detected at line 478
+Overfull \vbox (3.66695pt too high) detected at line 480
  []
 
 
@@ -1315,7 +1311,7 @@ Overfull \vbox (3.66695pt too high) detected at line 478
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-<./Images/échanges_bilatéraux_VS_nationaux.jpg, id=490, 1132.83224pt x 415.55
+<./Images/échanges_bilatéraux_VS_nationaux.jpg, id=488, 1132.83224pt x 415.55
 25pt>
 File: ./Images/échanges_bilatéraux_VS_nationaux.jpg Graphic file (type jpg)
 <use ./Images/échanges_bilatéraux_VS_nationaux.jpg>
@@ -1353,10 +1349,10 @@ Package rerunfilecheck Info: File `slide_conception.out' has not changed.
 (rerunfilecheck)             Checksum: 8B5FF8145C6C61292974591417BB2076;1200.
  ) 
 Here is how much of TeX's memory you used:
- 24046 strings out of 469959
- 462697 string characters out of 5469834
+ 24049 strings out of 469959
+ 462844 string characters out of 5469834
  1077926 words of memory out of 5000000
- 50229 multiletter control sequences out of 15000+600000
+ 50232 multiletter control sequences out of 15000+600000
  639113 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,16n,123p,393b,1490s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1369,9 +1365,9 @@ ype1/public/amsfonts/cm/cmss8.pfb><C:/Users/Darck/AppData/Local/Programs/MiKTeX
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Darck/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Darck/
 AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on slide_conception.pdf (50 pages, 1176097 bytes).
+Output written on slide_conception.pdf (50 pages, 1171966 bytes).
 PDF statistics:
- 570 PDF objects out of 1000 (max. 8388607)
+ 568 PDF objects out of 1000 (max. 8388607)
  107 named destinations out of 1000 (max. 500000)
  192 words of extra memory for PDF output out of 10000 (max. 10000000)
 

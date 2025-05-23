@@ -386,15 +386,17 @@ CREATE TABLE Trade (
 \begin{frame}[fragile]
   \frametitle{Requête SQL – Importations bas carbone}
   \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour les importations de technologies bas carbone}]
-SELECT year, SUM(trade_value) AS "Valeur des importations (en millions USD)"
+SELECT year, SUM(trade_value) AS trade_value
 FROM Trade
-JOIN year y USING(id_year)
+JOIN year USING(id_year)
 JOIN indicator USING(id_indicator)
 JOIN trade_flow USING(id_trade_flow)
-WHERE trade_flow = 'Imports'
+JOIN country USING(id_country)
+WHERE trade_flow = 'Imports' 
   AND indicator = 'Imports of low carbon technology products'
-GROUP BY year
-ORDER BY year;
+  AND units ~* '[.*dollar]'
+  AND iso2 IS NOT NULL
+GROUP BY year;
   \end{lstlisting}
 \end{frame}
 
@@ -431,15 +433,15 @@ ORDER BY year;
   \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour Top 10 pays exportateurs}]
 SELECT 
   country AS pays_exportateur,
-  ROUND(SUM(trade_value)) AS total_exports
-FROM bilateral_trade
-JOIN country ON id_conterpart_country = country.id_country
+  100.0 * SUM(trade_value) / SUM(SUM(trade_value)) OVER () AS total_exports
+FROM Trade
+JOIN country USING(id_country)
 JOIN trade_flow USING(id_trade_flow)
 JOIN year USING(id_year)
 JOIN indicator USING(id_indicator)
-WHERE indicator = 'Exports of low carbon technology products'
-  AND trade_flow = 'Exports'
+WHERE trade_flow = 'Exports'
   AND units ~* '[.*dollar]'
+  AND iso2 IS NOT NULL
   AND EXTRACT(YEAR FROM year) >= 2021
 GROUP BY country
 ORDER BY total_exports DESC
@@ -448,7 +450,7 @@ LIMIT 10;
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Relation Tableau – Top 5 technologies}
+  \frametitle{Visualisation – Top 10 pays exportateurs}
   \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_années)}
