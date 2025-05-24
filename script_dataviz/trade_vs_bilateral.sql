@@ -6,7 +6,7 @@ CREATE TEMPORARY TABLE temp_table (
    pct_bilateral DOUBLE PRECISION
 );
 
-\copy temp_table FROM 'C:/Users/Darck/Downloads/s201/data/trade_vs_bilateral.csv' DELIMITER ';' CSV HEADER;
+\copy temp_table FROM 'C:/Users/Darck/Desktop/ECOLE/STID/S2/SAEs/SAE-S2.01/data/trade_vs_bilateral.csv' DELIMITER ';' CSV HEADER;
 
 CREATE TABLE trade_vs_bilateral (
    Year DATE,
