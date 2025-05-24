@@ -115,17 +115,16 @@ CREATE TEMPORARY TABLE tmp_bilateral_trade_data (
 \copy tmp_trade_data FROM 'C:/Users/Darck/Desktop/ECOLE/STID/S2/SAEs/SAE-S2.01/data/Trade_in_Low_Carbon_Technology_Products.csv' DELIMITER ',' CSV HEADER;
 \copy tmp_bilateral_trade_data FROM 'C:/Users/Darck/Desktop/ECOLE/STID/S2/SAEs/SAE-S2.01/data/Bilateral_Trade_in_Low_Carbon_Technology_Products.csv' DELIMITER ',' CSV HEADER;
 
-
 -- Création des tables principales
 CREATE TABLE Country(
-   id_Country SMALLINT PRIMARY KEY,
+   id_Country SMALLSERIAL PRIMARY KEY,
    Country VARCHAR(50),
    ISO2 CHAR(2),
    ISO3 CHAR(3)
 );
 
 CREATE TABLE Indicator(
-   id_Indicator SMALLINT PRIMARY KEY,
+   id_Indicator SMALLSERIAL PRIMARY KEY,
    Indicator VARCHAR(80),
    Source VARCHAR,
    Units VARCHAR(50),
@@ -133,49 +132,48 @@ CREATE TABLE Indicator(
 );
 
 CREATE TABLE CTS(
-   id_CTS SMALLINT PRIMARY KEY,
+   id_CTS SMALLSERIAL PRIMARY KEY,
    CTS_Code VARCHAR(6),
    CTS_Name VARCHAR(100),
    CTS_Full_Descriptor VARCHAR(150)
 );
 
 CREATE TABLE Trade_Flow(
-   id_Trade_Flow SMALLINT PRIMARY KEY,
+   id_Trade_Flow SMALLSERIAL PRIMARY KEY,
    Trade_Flow VARCHAR(20)
 );
 
 CREATE TABLE Year(
-   id_Year SMALLINT PRIMARY KEY,
+   id_Year SMALLSERIAL PRIMARY KEY,
    Year DATE
 );
 
 CREATE TABLE Bilateral_Trade (
-    id_Country SMALLINT REFERENCES Country(id_Country),
-    id_Conterpart_country SMALLINT REFERENCES Country(id_Country),
-    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLINT REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(id_Trade_Flow),
-    id_Year SMALLINT REFERENCES Year(id_Year),
+    id_Country SMALLSERIAL REFERENCES Country(id_Country),
+    id_Counterpart_Country SMALLSERIAL REFERENCES Country(id_Country),
+    id_Indicator SMALLSERIAL REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(id_Trade_Flow),
+    id_Year SMALLSERIAL REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
-    PRIMARY KEY(id_Country, id_Conterpart_country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
+    PRIMARY KEY(id_Country, id_Counterpart_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
 
 -- Création de la table pour les données nationales
 CREATE TABLE Trade (
-    id_Country SMALLINT REFERENCES Country(id_Country),
-    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLINT REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(id_Trade_Flow),
-    id_Year SMALLINT REFERENCES Year(id_Year),
+    id_Country SMALLSERIAL REFERENCES Country(id_Country),
+    id_Indicator SMALLSERIAL REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(id_Trade_Flow),
+    id_Year SMALLSERIAL REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
 
 -- Insertion des données dans les tables principales
 -- Country
-INSERT INTO Country(id_Country, Country, ISO2, ISO3)
+INSERT INTO Country(Country, ISO2, ISO3)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY Country)::SMALLINT,
     Country,
     ISO2,
     ISO3
@@ -187,9 +185,8 @@ FROM (
 ORDER BY Country;
 
 -- Indicator
-INSERT INTO Indicator(id_Indicator, Indicator, Source, Units, Scale)
+INSERT INTO Indicator(Indicator, Source, Units, Scale)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY Indicator)::SMALLINT,
     Indicator,
     MIN(Source),
     MIN(Unit),
@@ -202,9 +199,8 @@ FROM (
 GROUP BY Indicator;
 
 -- CTS
-INSERT INTO CTS(id_CTS, CTS_Code, CTS_Name, CTS_Full_Descriptor)
+INSERT INTO CTS(CTS_Code, CTS_Name, CTS_Full_Descriptor)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY CTS_Code)::SMALLINT,
     CTS_Code,
     MIN(CTS_Name),
     MIN(CTS_Full_Descriptor)
@@ -216,9 +212,8 @@ FROM (
 GROUP BY CTS_Code;
 
 -- Trade_Flow
-INSERT INTO Trade_Flow(id_Trade_Flow, Trade_Flow)
+INSERT INTO Trade_Flow(Trade_Flow)
 SELECT 
-    ROW_NUMBER() OVER (ORDER BY Trade_Flow)::SMALLINT,
     Trade_Flow
 FROM (
     SELECT Trade_Flow FROM tmp_trade_data
@@ -271,7 +266,7 @@ WHERE flat.trade_value IS NOT NULL;
 
 -- Bilateral_Trade
 INSERT INTO Bilateral_Trade(
-    id_Country, id_Conterpart_country,id_Indicator,
+    id_Country, id_Counterpart_Country,id_Indicator,
     id_CTS, id_Trade_Flow, id_Year, trade_value
 )
 SELECT
