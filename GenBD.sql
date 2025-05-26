@@ -171,6 +171,7 @@ CREATE TABLE Trade (
 );
 
 -- Insertion des données dans les tables principales
+
 -- Country
 INSERT INTO Country(Country, ISO2, ISO3)
 SELECT 
@@ -186,30 +187,30 @@ ORDER BY Country;
 
 -- Indicator
 INSERT INTO Indicator(Indicator, Source, Units, Scale)
-SELECT 
+SELECT DISTINCT ON (Indicator) 
     Indicator,
-    MIN(Source),
-    MIN(Unit),
-    MIN(Scale)
+    Source,
+    Unit,
+    Scale
 FROM (
     SELECT Indicator, Source, Unit, Scale FROM tmp_trade_data
     UNION ALL
     SELECT Indicator, Source, Unit, Scale FROM tmp_bilateral_trade_data
 )
-GROUP BY Indicator;
+ORDER BY Indicator, Source;
 
 -- CTS
 INSERT INTO CTS(CTS_Code, CTS_Name, CTS_Full_Descriptor)
-SELECT 
+SELECT DISTINCT ON (CTS_Code)
     CTS_Code,
-    MIN(CTS_Name),
-    MIN(CTS_Full_Descriptor)
+    CTS_Name,
+    CTS_Full_Descriptor
 FROM (
     SELECT CTS_Code, CTS_Name, CTS_Full_Descriptor FROM tmp_trade_data
     UNION ALL
     SELECT CTS_Code, CTS_Name, CTS_Full_Descriptor FROM tmp_bilateral_trade_data
 )
-GROUP BY CTS_Code;
+ORDER BY CTS_Code, CTS_Name;
 
 -- Trade_Flow
 INSERT INTO Trade_Flow(Trade_Flow)
@@ -220,7 +221,8 @@ FROM (
     UNION ALL
     SELECT Trade_Flow FROM tmp_bilateral_trade_data
 ) AS all_tf
-GROUP BY Trade_Flow;
+GROUP BY Trade_Flow
+ORDER BY Trade_Flow;
 
 -- Year
 INSERT INTO Year(id_Year, Year)
@@ -303,7 +305,6 @@ JOIN CTS cts ON cts.CTS_Code = flat.CTS_Code
 JOIN Trade_Flow tf ON tf.Trade_Flow = flat.Trade_Flow
 JOIN Year y ON y.id_Year = flat.year_year
 WHERE flat.trade_value IS NOT NULL ;
-
 
 -- Suppression des tables temporaires
 DROP TABLE IF EXISTS tmp_trade_data;

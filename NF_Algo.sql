@@ -15,15 +15,15 @@ CTS = (
 
 Trade_Flow = (
     id_Trade_Flaw SMALLINT, 
-    Trade_Flow VARCHAR(20), 
-    Scale VARCHAR(5)
+    Trade_Flow VARCHAR(20)
 )
 
 Indicator = (
     idIndicator SMALLINT, 
     Indicator_ VARCHAR(100), 
     Source VARCHAR(150), 
-    Units VARCHAR(50)
+    Units VARCHAR(50),
+    Scale VARCHAR(5)
 )
 
 Year = (
