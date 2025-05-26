@@ -202,8 +202,8 @@
     \begin{itemize}
       \item \texttt{Country(\underline{idCountry}, Country, ISO2, ISO3)}
       \item \texttt{CTS(\underline{idCTS}, CTS\_Code, CTS\_Name, CTS\_Full\_Descriptor)}
-      \item \texttt{Trade\_Flow(\underline{id\_Trade\_Flaw}, Trade\_Flow, Scale)}
-      \item \texttt{Indicator(\underline{idIndicator}, Indicator\_, Source, Units)}
+      \item \texttt{Trade\_Flow(\underline{id\_Trade\_Flow}, Trade\_Flow, Scale)}
+      \item \texttt{Indicator(\underline{idIndicator}, Indicator, Source, Units)}
       \item \texttt{Year(\underline{id\_Year}, Year)}
       \item \texttt{Bilateral\_Trade(\underline{id\_country}, \underline{id\_counterpart}, \underline{id\_indicator}, \underline{id\_cts}, \underline{id\_Trade\_Flaw}, \underline{id\_year}, trade\_value)}
       \item \texttt{Trade(\underline{id\_country}, \underline{id\_indicator}, \underline{id\_cts}, \underline{id\_Trade\_Flaw}, \underline{id\_year}, trade\_value)}
@@ -257,7 +257,7 @@
   \frametitle{Création de la table \texttt{Country}}
 \begin{verbatim}
 CREATE TABLE Country(
-   id_Country SMALLINT PRIMARY KEY,
+   id_Country SMALLSERIAL PRIMARY KEY,
    Country VARCHAR(50),
    ISO2 CHAR(2),
    ISO3 CHAR(3)
@@ -269,7 +269,7 @@ CREATE TABLE Country(
   \frametitle{Création de la table \texttt{Indicator}}
 \begin{verbatim}
 CREATE TABLE Indicator(
-   id_Indicator SMALLINT PRIMARY KEY,
+   id_Indicator SMALLSERIAL PRIMARY KEY,
    Indicator VARCHAR(80),
    Source VARCHAR,
    Units VARCHAR(50),
@@ -282,7 +282,7 @@ CREATE TABLE Indicator(
   \frametitle{Création de la table \texttt{CTS}}
 \begin{verbatim}
 CREATE TABLE CTS(
-   id_CTS SMALLINT PRIMARY KEY,
+   id_CTS SMALLSERIAL PRIMARY KEY,
    CTS_Code VARCHAR(6),
    CTS_Name VARCHAR(100),
    CTS_Full_Descriptor VARCHAR(150)
@@ -294,7 +294,7 @@ CREATE TABLE CTS(
   \frametitle{Création de la table \texttt{Trade\_Flow}}
 \begin{verbatim}
 CREATE TABLE Trade_Flow(
-   id_Trade_Flow SMALLINT PRIMARY KEY,
+   id_Trade_Flow SMALLSERIAL PRIMARY KEY,
    Trade_Flow VARCHAR(20)
 );
 \end{verbatim}
@@ -304,7 +304,7 @@ CREATE TABLE Trade_Flow(
   \frametitle{Création de la table \texttt{Year}}
 \begin{verbatim}
 CREATE TABLE Year(
-   id_Year SMALLINT PRIMARY KEY,
+   id_Year SMALLSERIAL PRIMARY KEY,
    Year DATE
 );
 \end{verbatim}
@@ -314,12 +314,14 @@ CREATE TABLE Year(
   \frametitle{Création de la table \texttt{Bilateral\_Trade}}
 \begin{verbatim}
 CREATE TABLE Bilateral_Trade (
-    id_Country SMALLINT REFERENCES Country(id_Country),
-    id_Counterpart SMALLINT REFERENCES Country(id_Country),
-    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLINT REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(...),
-    id_Year SMALLINT REFERENCES Year(id_Year),
+    id_Country SMALLSERIAL REFERENCES Country(id_Country),
+    id_Counterpart SMALLSERIAL 
+    REFERENCES Country(id_Country),
+    id_Indicator SMALLSERIAL 
+    REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(...),
+    id_Year SMALLSERIAL REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Counterpart_Country,
                 id_Indicator, id_CTS, id_Trade_Flaw, id_Year)
@@ -331,11 +333,13 @@ CREATE TABLE Bilateral_Trade (
   \frametitle{Création de la table \texttt{Trade}}
 \begin{verbatim}
 CREATE TABLE Trade (
-    id_Country SMALLINT REFERENCES Country(id_Country),
-    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLINT REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(...),
-    id_Year SMALLINT REFERENCES Year(id_Year),
+    id_Country SMALLSERIAL 
+    REFERENCES Country(id_Country),
+    id_Indicator SMALLSERIAL 
+    REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(...),
+    id_Year SMALLSERIAL REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Indicator, id_CTS, 
     id_Trade_Flaw, id_Year)
@@ -366,10 +370,12 @@ CREATE TABLE Trade (
 \begin{frame}
   \frametitle{Requêtes d’analyse}
   \begin{itemize}
-    \item Évolution annuelle des importations mondiales de technologies bas-carbone.
-    \item Top 5 technologies les plus échangées par type de flux
-    \item Top pays exportateurs par valeur totale échangée (3 dernières années)
-    \item Comparaison des échanges bilatéraux vs nationaux sur une année donnée
+    \item Top 10 des pays importateurs de technologies en provenance de Chine (2021)
+    \item Répartition mondiale des exportations de technologies en 2021 (\%)
+    \item Part annuelle des échanges bilatéraux vs nationaux dans le commerce mondial (1994 à 2023)
+    \item Nombre de pays importateurs depuis la Chine (2021)
+    \item Nombre de flux d’exportation de la Chine enregistrés (2021)
+    \item Valeur totale des exportations de la Chine (2021)
   \end{itemize}
 \end{frame}
 
@@ -383,108 +389,13 @@ CREATE TABLE Trade (
   \end{itemize}
 \end{frame}
 
+
 \begin{frame}[fragile]
-  \frametitle{Requête SQL – Importations bas carbone}
-  \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour les importations de technologies bas carbone}]
-SELECT year, SUM(trade_value) AS trade_value
-FROM Trade
-JOIN year USING(id_year)
-JOIN indicator USING(id_indicator)
-JOIN trade_flow USING(id_trade_flow)
-JOIN country USING(id_country)
-WHERE trade_flow = 'Imports' 
-  AND indicator = 'Imports of low carbon technology products'
-  AND units ~* '[.*dollar]'
-  AND iso2 IS NOT NULL
-GROUP BY year;
-  \end{lstlisting}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Visualisation}
+  \frametitle{Tableau de Bord - Étude sur la Chine}
   \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{./Images/Évolution_des_importations_mondiales_par_année_bas-corbone}
-    \caption{Évolution annuelle des importations mondiales de technologies bas-carbone}
-  \end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Relation Tableau – Top 5 technologies}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{./Images/jointure}
-    \caption{Relations établie sur Tableau Desktop}
-  \end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Relation Tableau – Top 5 technologies}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{./Images/Top_5_technologies_les_plus_échangées_par_type_de_flux}
-    \caption{Top 5 technologies les plus échangées par type de flux}
-  \end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Requête SQL – Top 10 pays exportateurs}
-  \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour Top 10 pays exportateurs}]
-SELECT 
-  country AS pays_exportateur,
-  100.0 * SUM(trade_value) / SUM(SUM(trade_value)) OVER () AS total_exports
-FROM Trade
-JOIN country USING(id_country)
-JOIN trade_flow USING(id_trade_flow)
-JOIN year USING(id_year)
-JOIN indicator USING(id_indicator)
-WHERE trade_flow = 'Exports'
-  AND units ~* '[.*dollar]'
-  AND iso2 IS NOT NULL
-  AND EXTRACT(YEAR FROM year) >= 2021
-GROUP BY country
-ORDER BY total_exports DESC
-LIMIT 10;
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Visualisation – Top 10 pays exportateurs}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{./Images/Top_pays_exportateurs_par_valeur_totale_échangée_(3_dernières_années)}
-    \caption{Top 10 pays exportateurs par valeur totale échangée (3 dernières années)}
-  \end{figure}
-\end{frame}
-
-
-\begin{frame}[fragile]
-  \frametitle{Requête SQL – Échanges Bilatéraux VS Nationaux}
-  \begin{lstlisting}[style=sqlStyle, caption={Requête SQL pour Échanges Bilatéraux VS Nationaux}]
-WITH totals AS (
-  SELECT
-    y.year,
-    SUM(t.trade_value) AS total_trade,
-    SUM(bt.trade_value) AS total_bilateral
-  FROM year AS y
-  LEFT JOIN trade AS t ON t.id_year = y.id_year
-    AND t.id_indicator IN (
-      SELECT id_indicator FROM indicator WHERE units ILIKE '%dollar%'
-    )
-  LEFT JOIN bilateral_trade AS bt ON bt.id_year = y.id_year
-    AND bt.id_indicator IN (
-      SELECT id_indicator FROM indicator WHERE units ILIKE '%dollar%'
-  ...
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Relation Tableau – Top 5 technologies}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{./Images/échanges_bilatéraux_VS_nationaux}
-    \caption{Comparaison des échanges Bilatéraux VS Nationaux}
+    \includegraphics[width=0.625\linewidth]{../script_dataviz/dash-board}
+    \caption{2021 : L'année de la domination chinoise dans le commerce vert}
   \end{figure}
 \end{frame}
 

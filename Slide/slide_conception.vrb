@@ -1,6 +1,6 @@
-\frametitle{Relation Tableau – Top 5 technologies}
+\frametitle{Tableau de Bord - Étude sur la Chine}
   \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{./Images/échanges_bilatéraux_VS_nationaux}
-    \caption{Comparaison des échanges Bilatéraux VS Nationaux}
+    \includegraphics[width=0.625\linewidth]{../script_dataviz/dash-board}
+    \caption{2021 : L'année de la domination chinoise dans le commerce vert}
   \end{figure}
