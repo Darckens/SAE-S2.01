@@ -149,23 +149,23 @@ CREATE TABLE Year(
 );
 
 CREATE TABLE Bilateral_Trade (
-    id_Country SMALLSERIAL REFERENCES Country(id_Country),
-    id_Counterpart_Country SMALLSERIAL REFERENCES Country(id_Country),
-    id_Indicator SMALLSERIAL REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(id_Trade_Flow),
-    id_Year SMALLSERIAL REFERENCES Year(id_Year),
+    id_Country SMAlLINT REFERENCES Country(id_Country),
+    id_Counterpart_Country SMAlLINT REFERENCES Country(id_Country),
+    id_Indicator SMAlLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMAlLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMAlLINT REFERENCES Trade_Flow(id_Trade_Flow),
+    id_Year SMAlLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Counterpart_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
 
 -- Création de la table pour les données nationales
 CREATE TABLE Trade (
-    id_Country SMALLSERIAL REFERENCES Country(id_Country),
-    id_Indicator SMALLSERIAL REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(id_Trade_Flow),
-    id_Year SMALLSERIAL REFERENCES Year(id_Year),
+    id_Country SMAlLINT REFERENCES Country(id_Country),
+    id_Indicator SMAlLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMAlLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMAlLINT REFERENCES Trade_Flow(id_Trade_Flow),
+    id_Year SMAlLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
