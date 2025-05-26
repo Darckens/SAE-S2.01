@@ -220,7 +220,7 @@ FROM (
     SELECT Trade_Flow FROM tmp_trade_data
     UNION ALL
     SELECT Trade_Flow FROM tmp_bilateral_trade_data
-) AS all_tf
+)
 GROUP BY Trade_Flow
 ORDER BY Trade_Flow;
 
