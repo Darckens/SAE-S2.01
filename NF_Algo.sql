@@ -1,52 +1,53 @@
 -- Traduction directe du schéma Entité-Association
 
-Country = (idCountry SMALLINT,
+Country = (
+    id_Country SMALLSERIAL,
     Country VARCHAR(50),
     ISO2 CHAR(2),
     ISO3 CHAR(3)
 )
 
 CTS = (
-    idCTS SMALLINT, 
+    id_CTS SMALLSERIAL, 
     CTS_Code VARCHAR(6), 
     CTS_Name VARCHAR(100), 
     CTS_Full_Descriptor VARCHAR(150)
 )
 
 Trade_Flow = (
-    id_Trade_Flaw SMALLINT, 
+    id_Trade_Flow SMALLSERIAL, 
     Trade_Flow VARCHAR(20)
 )
 
 Indicator = (
-    idIndicator SMALLINT, 
-    Indicator_ VARCHAR(100), 
+    id_Indicator SMALLSERIAL, 
+    Indicator VARCHAR(100), 
     Source VARCHAR(150), 
     Units VARCHAR(50),
     Scale VARCHAR(5)
 )
 
 Year = (
-    id_Year SMALLINT, 
+    id_Year SMALLSERIAL, 
     Year DATE
 )
 
 Bilateral_Trade = (
-    id_country SMALLINT, 
-    id_counterpart SMALLINT, 
-    id_indicator SMALLINT, 
-    id_cts SMALLINT, 
-    id_Trade_Flaw SMALLINT, 
-    id_year SMALLINT,
+    id_Country SMALLINT, 
+    id_Counterpart SMALLINT, 
+    id_Indicator SMALLINT, 
+    id_CTS SMALLINT, 
+    id_Trade_Flow SMALLINT, 
+    id_Year SMALLINT,
     trade_value DOUBLE PRECISION
 )
 
 Trade = (
-    id_country SMALLINT, 
-    id_indicator SMALLINT, 
-    id_cts SMALLINT, 
-    id_Trade_Flaw SMALLINT, 
-    id_year SMALLINT,
+    id_Country SMALLINT, 
+    id_Indicator SMALLINT, 
+    id_CTS SMALLINT, 
+    id_Trade_Flow SMALLINT, 
+    id_Year SMALLINT,
     trade_value DOUBLE PRECISION
 )
 
