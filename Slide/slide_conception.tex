@@ -41,7 +41,7 @@
 \subtitle{S2.01 Conception et implémentation d'une base de données}
 
 \author[Ibrahim BENKHERFELLAH \and Axel COULET]{Ibrahim BENKHERFELLAH \and Axel COULET}
-\institute[USPN]{Université Sorbonne Paris Nord \\BUT1 SD \- Semestre 2 BUT1 SD \- Semestre 2}
+\institute[USPN]{Université Sorbonne Paris Nord \\BUT1 SD \- Semestre 2}
 \date[\today]{\today}
 
 \begin{document}
@@ -314,14 +314,12 @@ CREATE TABLE Year(
   \frametitle{Création de la table \texttt{Bilateral\_Trade}}
 \begin{verbatim}
 CREATE TABLE Bilateral_Trade (
-    id_Country SMALLSERIAL REFERENCES Country(id_Country),
-    id_Counterpart SMALLSERIAL 
-    REFERENCES Country(id_Country),
-    id_Indicator SMALLSERIAL 
-    REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(...),
-    id_Year SMALLSERIAL REFERENCES Year(id_Year),
+    id_Country SMALLINT REFERENCES Country(id_Country),
+    id_Counterpart SMALLINT REFERENCES Country(id_Country),
+    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(...),
+    id_Year SMALLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Counterpart_Country,
                 id_Indicator, id_CTS, id_Trade_Flaw, id_Year)
@@ -333,13 +331,11 @@ CREATE TABLE Bilateral_Trade (
   \frametitle{Création de la table \texttt{Trade}}
 \begin{verbatim}
 CREATE TABLE Trade (
-    id_Country SMALLSERIAL 
-    REFERENCES Country(id_Country),
-    id_Indicator SMALLSERIAL 
-    REFERENCES Indicator(id_Indicator),
-    id_CTS SMALLSERIAL REFERENCES CTS(id_CTS),
-    id_Trade_Flow SMALLSERIAL REFERENCES Trade_Flow(...),
-    id_Year SMALLSERIAL REFERENCES Year(id_Year),
+    id_Country SMALLINT REFERENCES Country(id_Country),
+    id_Indicator SMALLINT REFERENCES Indicator(id_Indicator),
+    id_CTS SMALLINT REFERENCES CTS(id_CTS),
+    id_Trade_Flow SMALLINT REFERENCES Trade_Flow(...),
+    id_Year SMALLINT REFERENCES Year(id_Year),
     trade_value DOUBLE PRECISION,
     PRIMARY KEY(id_Country, id_Indicator, id_CTS, 
     id_Trade_Flaw, id_Year)

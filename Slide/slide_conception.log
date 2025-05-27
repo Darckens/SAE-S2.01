@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  26 MAY 2025 20:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.15)  28 MAY 2025 00:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1173,7 +1173,13 @@ Overfull \vbox (2.65125pt too high) detected at line 182
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-Overfull \hbox (8.37465pt too wide) in paragraph at lines 16--16
+Overfull \hbox (8.37465pt too wide) in paragraph at lines 14--14
+[]    \OT1/cmtt/m/n/10.95 id_Indicator SMALLINT REFERENCES Indicator(id_Indicat
+or),[] 
+ []
+
+
+Overfull \hbox (8.37465pt too wide) in paragraph at lines 14--14
 []                \OT1/cmtt/m/n/10.95 id_Indicator, id_CTS, id_Trade_Flaw, id_Y
 ear)[] 
  []
@@ -1185,7 +1191,13 @@ ear)[]
 ]
 \openout4 = `slide_conception.vrb'.
 
- (slide_conception.vrb)
+ (slide_conception.vrb
+Overfull \hbox (8.37465pt too wide) in paragraph at lines 13--13
+[]    \OT1/cmtt/m/n/10.95 id_Indicator SMALLINT REFERENCES Indicator(id_Indicat
+or),[] 
+ []
+
+)
 
 [36
 
@@ -1209,14 +1221,14 @@ ear)[]
 \openout4 = `slide_conception.vrb'.
 
  (slide_conception.vrb
-<../script_dataviz/dash-board.jpg, id=428, 1011.78pt x 936.49875pt>
+<../script_dataviz/dash-board.jpg, id=428, 5396.16pt x 4994.66pt>
 File: ../script_dataviz/dash-board.jpg Graphic file (type jpg)
 <use ../script_dataviz/dash-board.jpg>
 Package pdftex.def Info: ../script_dataviz/dash-board.jpg  used on input line 4
 .
-(pdftex.def)             Requested size: 213.93456pt x 198.01378pt.
+(pdftex.def)             Requested size: 213.93456pt x 197.9995pt.
 )
-Overfull \vbox (7.15431pt too high) detected at line 400
+Overfull \vbox (7.14003pt too high) detected at line 396
  []
 
 
@@ -1252,7 +1264,7 @@ Package rerunfilecheck Info: File `slide_conception.out' has not changed.
 Here is how much of TeX's memory you used:
  23429 strings out of 469959
  452984 string characters out of 5469834
- 800784 words of memory out of 5000000
+ 800761 words of memory out of 5000000
  49641 multiletter control sequences out of 15000+600000
  639113 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1266,7 +1278,7 @@ ype1/public/amsfonts/cm/cmss8.pfb><C:/Users/Darck/AppData/Local/Programs/MiKTeX
 rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Darck/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/Darck/
 AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on slide_conception.pdf (43 pages, 1092521 bytes).
+Output written on slide_conception.pdf (43 pages, 2017702 bytes).
 PDF statistics:
  506 PDF objects out of 1000 (max. 8388607)
  93 named destinations out of 1000 (max. 500000)
