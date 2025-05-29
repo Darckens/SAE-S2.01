@@ -52,10 +52,10 @@ Ces analyses ont été représentées à l’aide de graphiques et cartes, facil
 ## Compétences mobilisées
 
 - 🔧 Modélisation conceptuelle et relationnelle
-- 🧠 Analyse de données et interprétation
 - 🗃️ Structuration et normalisation des données
-- 📈 Requêtage avancé (SQL)
+- 📈 Requêtage avancé (PostgreSQL)
 - 🗺️ Visualisation et narration de données
+- 🧠 Analyse de données et interprétation
 
 ## Membres du projet
 
