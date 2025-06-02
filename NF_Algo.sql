@@ -1,56 +1,17 @@
 -- Traduction directe du schéma Entité-Association
 
-Country = (
-    id_Country SMALLSERIAL,
-    Country VARCHAR(50),
-    ISO2 CHAR(2),
-    ISO3 CHAR(3)
-)
+COUNTRY(id_Country, Country, ISO2, ISO3)
+CTS(id_CTS, CTS_Code,  CTS_Name, CTS_Full_Descriptor)
+TRADE_FLOW(id_Trade_Flow, Trade_Flow)
+INDICATOR(id_Indicator, Indicator, Source, Units, Scale)
+YEAR(id_Year, Year)
+BILATERAL_TRADE(id_Country, id_Counterpart_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year, trade_value)
+→ où id_Country, id_Counterpart_Country, id_Indicator,  id_CTS, id_Trade_Flow et id_Year font respectivement 
+références à COUNTRY, COUNTRY, INDICATOR, CTS, YEAR, TRADE_FLOW.
 
-CTS = (
-    id_CTS SMALLSERIAL, 
-    CTS_Code VARCHAR(6), 
-    CTS_Name VARCHAR(100), 
-    CTS_Full_Descriptor VARCHAR(150)
-)
-
-Trade_Flow = (
-    id_Trade_Flow SMALLSERIAL, 
-    Trade_Flow VARCHAR(20)
-)
-
-Indicator = (
-    id_Indicator SMALLSERIAL, 
-    Indicator VARCHAR(100), 
-    Source VARCHAR(150), 
-    Units VARCHAR(50),
-    Scale VARCHAR(5)
-)
-
-Year = (
-    id_Year SMALLSERIAL, 
-    Year DATE
-)
-
-Bilateral_Trade = (
-    id_Country SMALLINT, 
-    id_Counterpart SMALLINT, 
-    id_Indicator SMALLINT, 
-    id_CTS SMALLINT, 
-    id_Trade_Flow SMALLINT, 
-    id_Year SMALLINT,
-    trade_value DOUBLE PRECISION
-)
-
-Trade = (
-    id_Country SMALLINT, 
-    id_Indicator SMALLINT, 
-    id_CTS SMALLINT, 
-    id_Trade_Flow SMALLINT, 
-    id_Year SMALLINT,
-    trade_value DOUBLE PRECISION
-)
-
+TRADE(id_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year, trade_value)
+→ où id_country, id_Indicator, id_CTS, id_Trade_Flow et id_Year font respectivement références 
+à COUNTRY, INDICATOR, CTS, TRADE_FLOW et YEAR.
 
 -- Analyse des formes normales
 
@@ -78,5 +39,5 @@ Trade = (
 -- Le schéma est en 3NF.
 -- Toutes les dépendances fonctionnelles ont un côté gauche qui est une super-clé.
 -- Il n’existe pas de dépendances où un attribut non-clé détermine un autre attribut non-clé.
--- Exemple : dans Echanger_Avec, seule la clé complète détermine trade_value.
+-- Exemple : dans Bilateral_Trade, seule la clé complète détermine trade_value.
 -- Le schéma est en BCNF !
