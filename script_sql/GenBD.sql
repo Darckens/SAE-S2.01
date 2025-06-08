@@ -1,7 +1,3 @@
-----------------------------------------
--- Suppression des tables principales --
-----------------------------------------
-
 DROP TABLE IF EXISTS Bilateral_Trade;
 DROP TABLE IF EXISTS Trade;
 DROP TABLE IF EXISTS Year;
@@ -11,9 +7,7 @@ DROP TABLE IF EXISTS Indicator;
 DROP TABLE IF EXISTS Country;
 
 
-------------------------------------
 -- Création des tables temporaire --
-------------------------------------
 
 CREATE TEMPORARY TABLE tmp_trade_data (
     ObjectId INTEGER PRIMARY KEY,
@@ -108,14 +102,13 @@ CREATE TEMPORARY TABLE tmp_bilateral_trade_data (
     F2023 DOUBLE PRECISION
 );
 
--------------------------
+
 -- Importation des CSV --
--------------------------
 
 \copy tmp_trade_data FROM 'C:/Users/Darck/Desktop/ECOLE/STID/S2/SAEs/SAE-S2.01/data/Trade_in_Low_Carbon_Technology_Products.csv' DELIMITER ',' CSV HEADER;
 \copy tmp_bilateral_trade_data FROM 'C:/Users/Darck/Desktop/ECOLE/STID/S2/SAEs/SAE-S2.01/data/Bilateral_Trade_in_Low_Carbon_Technology_Products.csv' DELIMITER ',' CSV HEADER;
 
--- Création des tables principales
+-- Création des tables principales --
 CREATE TABLE Country(
    id_Country SMALLSERIAL PRIMARY KEY,
    Country VARCHAR(50),
@@ -159,7 +152,7 @@ CREATE TABLE Bilateral_Trade (
     PRIMARY KEY(id_Country, id_Counterpart_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
 
--- Création de la table pour les données nationales
+-- Création de la table pour les données nationales --
 CREATE TABLE Trade (
     id_Country SMAlLINT REFERENCES Country(id_Country),
     id_Indicator SMAlLINT REFERENCES Indicator(id_Indicator),
@@ -170,9 +163,9 @@ CREATE TABLE Trade (
     PRIMARY KEY(id_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year)
 );
 
--- Insertion des données dans les tables principales
+-- Insertion des données dans les tables principales --
 
--- Country
+-- Country --
 INSERT INTO Country(Country, ISO2, ISO3)
 SELECT 
     Country,
@@ -185,7 +178,7 @@ FROM (
 )
 ORDER BY Country;
 
--- Indicator
+-- Indicator --
 INSERT INTO Indicator(Indicator, Source, Units, Scale)
 SELECT DISTINCT ON (Indicator) 
     Indicator,
@@ -199,7 +192,7 @@ FROM (
 )
 ORDER BY Indicator, Source;
 
--- CTS
+-- CTS --
 INSERT INTO CTS(CTS_Code, CTS_Name, CTS_Full_Descriptor)
 SELECT DISTINCT ON (CTS_Code)
     CTS_Code,
@@ -212,7 +205,7 @@ FROM (
 )
 ORDER BY CTS_Code, CTS_Name;
 
--- Trade_Flow
+-- Trade_Flow --
 INSERT INTO Trade_Flow(Trade_Flow)
 SELECT 
     Trade_Flow
@@ -224,13 +217,13 @@ FROM (
 GROUP BY Trade_Flow
 ORDER BY Trade_Flow;
 
--- Year
+-- Year --
 INSERT INTO Year(id_Year, Year)
 SELECT y, make_date(y, 1, 1)
 FROM generate_series(1994, 2023) AS y;
 
 
--- Insertion des données nationales
+-- Trade --
 INSERT INTO Trade(
     id_Country, id_Indicator, id_CTS, id_Trade_Flow, id_Year, trade_value
 )
@@ -266,7 +259,7 @@ JOIN Trade_Flow tf ON tf.Trade_Flow = flat.Trade_Flow
 JOIN Year y ON y.id_Year = flat.year_year
 WHERE flat.trade_value IS NOT NULL;
 
--- Bilateral_Trade
+-- Bilateral_Trade --
 INSERT INTO Bilateral_Trade(
     id_Country, id_Counterpart_Country,id_Indicator,
     id_CTS, id_Trade_Flow, id_Year, trade_value
@@ -306,6 +299,6 @@ JOIN Trade_Flow tf ON tf.Trade_Flow = flat.Trade_Flow
 JOIN Year y ON y.id_Year = flat.year_year
 WHERE flat.trade_value IS NOT NULL ;
 
--- Suppression des tables temporaires
+-- Suppression des tables temporaires --
 DROP TABLE IF EXISTS tmp_trade_data;
 DROP TABLE IF EXISTS tmp_bilateral_trade_data;
