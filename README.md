@@ -4,15 +4,14 @@
 
 Ce projet a été réalisé dans le cadre de la SAÉ du BUT Science des Données, intitulée **SAÉ 2.01 : Conception et implémentation d'une base de données relationnelle**. Il s’inscrit dans la continuité des apprentissages en bases de données, modélisation et manipulation des données à des fins décisionnelles.
 
-L’objectif principal de cette SAÉ est de maîtriser toutes les étapes nécessaires à la construction d'une base de données relationnelle à partir de données réelles : analyse des besoins, modélisation conceptuelle et logique, alimentation, et interrogation via SQL.
 
 > L’étudiant est placé dans la peau d’un gestionnaire de base de données, chargé d’intégrer, structurer et exploiter les flux d’échanges commerciaux à des fins d’analyse stratégique.
 
 ## Objectifs et problématique
 
-La base de données est un outil central dans les processus décisionnels. Il est donc essentiel de savoir modéliser les données, les structurer et les interroger efficacement. Pour cela, notre projet a consisté à concevoir une base à partir de fichiers plats, les intégrer, et les interroger pour en tirer des analyses pertinentes.
+La base de données est un outil central dans les processus décisionnels. L’objectif principal de cette SAÉ est de maîtriser toutes les étapes nécessaires à la construction d'une base de données relationnelle à partir de données réelles : analyse des besoins, modélisation conceptuelle, création et implémentation de la BD, et interrogation de celle-ci via SQL.
 
-### Problématique posée :
+## Problématique posée (lors de l'intérogation de la base) :
 > Comment les flux d’exportation de technologies bas carbone se sont-ils structurés à l’échelle mondiale en 2021, et quel a été le rôle stratégique de la Chine dans cette dynamique commerciale ?
 
 ## Description du projet
@@ -21,7 +20,7 @@ Après une phase d'exploration des données, nous avons opté pour une approche 
 
 L’objectif n’était pas d’enchaîner des requêtes indépendantes, mais bien de construire un **ensemble de visualisations cohérentes**, en développant un tableau de bord structuré permettant d’explorer les dynamiques globales du commerce de technologies vertes.
 
-Nous avons modélisé, implémenté et alimenté notre base (via des jointures, la fonction `UNNEST`, les conversions nécessaires pour faciliter l’analyse temporelle, etc.) puis utilisé SQL pour générer les indicateurs pertinents.
+Nous avons crée puis implémenté notre base (via des jointures, la fonction `UNNEST`, les conversions nécessaires pour faciliter l’analyse temporelle, etc.) puis utilisé PostgreSQL pour générer les indicateurs pertinents.
 
 ## Analyses réalisées
 
@@ -38,7 +37,7 @@ Ces analyses ont été représentées à l’aide de graphiques et cartes, facil
 ## Choix techniques
 
 - PostgreSQL pour la gestion de la base
-- Requêtes complexes SQL (fenêtres, agrégats, jointures, `UNNEST`, filtrage, etc.)
+- Requêtes SQL (agrégats, jointures, `UNNEST`, filtrage, etc.)
 - Construction de la base via des scripts SQL (création, insertion, jointures)
 - Utilisation de Metabase pour l’interrogation visuelle et les tableaux de bord
 - Respect des bonnes pratiques relationnelles (clés primaires, séquences `SERIAL`, normalisation)
