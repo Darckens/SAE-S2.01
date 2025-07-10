@@ -1,60 +1,41 @@
-# SAE 2.01 – Conception et Implémentation d'une Base de Données
+# Conception et implémentation d’une base de données relationnelle
 
-## Contexte général
+## Présentation du projet
 
-Ce projet a été réalisé dans le cadre de la SAÉ du BUT Science des Données, intitulée **SAÉ 2.01 : Conception et implémentation d'une base de données relationnelle**. Il s’inscrit dans la continuité des apprentissages en bases de données, modélisation et manipulation des données à des fins décisionnelles.
+Ce projet a été réalisé dans le cadre de la SAÉ 2.01 du BUT Science des Données. Il consiste à concevoir, créer, peupler et interroger une base de données relationnelle à partir de jeux de données réels. Le thème global porte sur l’analyse de données liées au commerce international. 
 
+La base de données est un outil central dans les processus décisionnels. L’objectif principal de ce projet est de maîtriser toutes les étapes nécessaires à la construction d'une base de données relationnelle à partir de données réelles.
 
-> L’étudiant est placé dans la peau d’un gestionnaire de base de données, chargé d’intégrer, structurer et exploiter les flux d’échanges commerciaux à des fins d’analyse stratégique.
+Dans la peau d’un gestionnaire de base de données, nous avons été amenés à structurer et exploiter les flux d’échanges commerciaux à des fins d’analyse stratégique. Pour donner du sens à notre démarche, nous avons choisi de concentrer nos analyses sur une problématique ciblée : **le rôle stratégique de la Chine dans les exportations de technologies à faible empreinte carbone en 2021**. Cette année a marqué un pic historique dans les échanges, ce qui en fait un terrain d’étude pertinent.
 
-## Objectifs et problématique
+## Outils et notions mobilisées
 
-La base de données est un outil central dans les processus décisionnels. L’objectif principal de cette SAÉ est de maîtriser toutes les étapes nécessaires à la construction d'une base de données relationnelle à partir de données réelles : analyse des besoins, modélisation conceptuelle, création et implémentation de la BD, et interrogation de celle-ci via SQL.
+- **Langage** : SQL
+- **SGBD** : PostgreSQL
+- **Outils de visualisation** : Metabase
+- **Notions mobilisées** :
+  - Modélisation entités-associations
+  - Schéma relationnel (normalisation, clés primaires/étrangères)
+  - Création de tables et peuplement (via scripts SQL)
+  - Requêtes avancée : jointures, agrégats, filtres, UNNEST
+  - Visualisation de résultats sous forme de tableaux de bord
 
-## Problématique posée (lors de l'intérogation de la base) :
+Ces compétences s’inscrivent dans les objectifs pédagogiques du semestre 2 : concevoir une base relationnelle cohérente, exploitable et adaptée à une problématique réelle d’analyse de données.
+
+## Sujet du projet
+
+Le projet s’appuie sur deux jeux de données du FMI portant sur le commerce de produits bas carbone. L’objectif est de structurer ces données dans une base relationnelle, puis de produire des analyses exploitables dans un contexte décisionnel.
+
+Nous avons ciblé notre étude sur l’année 2021 et le cas de la Chine, pour les raisons évoquées ci-dessus. À partir de cette base, nous avons développé un ensemble de requêtes permettant de répondre à des questions précises, tout en construisant un tableau de bord pour explorer visuellement les résultats.
+
+### Problématique posée (lors de l'intérogation de la base) :
 > Comment les flux d’exportation de technologies bas carbone se sont-ils structurés à l’échelle mondiale en 2021, et quel a été le rôle stratégique de la Chine dans cette dynamique commerciale ?
 
-## Description du projet
-
-Après une phase d'exploration des données, nous avons opté pour une approche d'analyse par croisement des tables `Trade` et `Bilateral_Trade`, en ciblant particulièrement l’année 2021, identifiée comme une année marquant un pic historique des échanges.
-
-L’objectif n’était pas d’enchaîner des requêtes indépendantes, mais bien de construire un **ensemble de visualisations cohérentes**, en développant un tableau de bord structuré permettant d’explorer les dynamiques globales du commerce de technologies vertes.
-
-Nous avons crée puis implémenté notre base (via des jointures, la fonction `UNNEST`, les conversions nécessaires pour faciliter l’analyse temporelle, etc.) puis utilisé PostgreSQL pour générer les indicateurs pertinents.
-
-## Analyses réalisées
-
-Parmi les analyses mises en place :
-
-- Suivi de l’évolution des flux bilatéraux et nationaux de 1994 à 2023
-- Analyse du pic de 2021
-- Classement des principaux pays importateurs depuis la Chine
-- Carte des exportations mondiales par pays en 2021
-- Indicateurs globaux : nombre d’exports, nombre de pays concernés, volume total
-
-Ces analyses ont été représentées à l’aide de graphiques et cartes, facilitant leur lecture et leur interprétation.
-
-## Choix techniques
-
-- PostgreSQL pour la gestion de la base
-- Requêtes SQL (agrégats, jointures, `UNNEST`, filtrage, etc.)
-- Construction de la base via des scripts SQL (création, insertion, jointures)
-- Utilisation de Metabase pour l’interrogation visuelle et les tableaux de bord
-- Respect des bonnes pratiques relationnelles (clés primaires, séquences `SERIAL`, normalisation)
-
-## Points techniques notables
-
-- Nous avons utilisé un identifiant `id_year` pour les jointures entre tables, mais aussi un champ `year` typé `DATE` pour des raisons de compatibilité avec Metabase.
-- Les jointures effectuées après la transformation `UNNEST` ont permis d'assurer la cohérence référentielle entre nos fichiers plats et les tables de référence (pays, indicateurs, etc.).
-- Les séquences PostgreSQL associées aux identifiants (`SERIAL`) ont permis l’auto-incrément des clés primaires.
-
-## Compétences mobilisées
-
-- 🔧 Modélisation conceptuelle et relationnelle
-- 🗃️ Structuration et normalisation des données
-- 📈 Requêtage avancé (PostgreSQL)
-- 🗺️ Visualisation et narration de données
-- 🧠 Analyse de données et interprétation
+Les livrables incluent :
+- Un modèle entités-associations
+- Un schéma relationnel détaillé
+- Des scripts SQL de création et de peuplement
+- Une série de requêtes et de visualisations orientées analyse stratégique
 
 ## Membres du projet
 
